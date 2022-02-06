@@ -1,0 +1,1475 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
+
+/* =============
+	Colors
+	Gold Hex: #8d721e #dac684 #cbae6a, #755c34, #8b7b52
+	Gold RGB: 141,114,30
+============== */
+:root {
+  --first-color: #dac684;
+  --second-color: #8d721e;
+  --warning-text: #f00;
+  --darker-bg: #222;
+  --dark-bg: #444;
+  --mid-darker: #555;
+  --mid-dark: #777;
+  --light-accent: #aaa;
+
+  --scrollbar-width: 12px;
+  --scrollbar-height: 8px;
+}
+
+/* =============
+   Scrollbar 
+============== */
+*{scrollbar-color: var(--second-color) var(--second-color);scrollbar-width:auto}
+td::-webkit-scrollbar{background: var(--light-accent)}
+::-webkit-scrollbar{width:var(--scrollbar-width);height:var(--scrollbar-height);background:none;border:0}
+::-webkit-scrollbar-track{background:#eee;border:0;margin:2px;border-radius:5px}
+::-webkit-scrollbar-thumb{background:var(--second-color);border-radius:5px;border:0}
+::-webkit-scrollbar-thumb:hover{background:var(--second-color)}
+::-webkit-scrollbar-thumb:active{background:var(--second-color)}
+::-webkit-scrollbar-thumb:vertical{border:0}
+::-webkit-scrollbar-thumb:horizontal{border:0}
+::-webkit-scrollbar-button{border-style:solid;height:var(--scrollbar-height);width:var(--scrollbar-width);background:none}
+::-webkit-scrollbar-button:vertical:decrement{border-width:0 6px 10px 6px;border-color:transparent transparent var(--second-color)}
+::-webkit-scrollbar-button:vertical:decrement:hover{border-color:transparent transparent var(--second-color)}
+::-webkit-scrollbar-button:vertical:increment{border-width:10px 6px 0 6px;border-color: var(--second-color) transparent transparent}
+::-webkit-scrollbar-button:vertical:increment:hover{border-color: var(--second-color) transparent transparent}
+::-webkit-scrollbar-button:horizontal:decrement{border-width: var6px 10px 6px 0;border-color:transparent var(--second-color) transparent transparent}
+::-webkit-scrollbar-button:horizontal:decrement:hover{border-color:transparent var(--second-color) transparent transparent}
+::-webkit-scrollbar-button:horizontal:increment{border-width:6px 0 6px 10px;border-color:transparent transparent transparent var(--second-color)}
+::-webkit-scrollbar-button:horizontal:increment:hover{border-color:transparent transparent transparent var(--second-color)}
+
+/* =============
+	Global Layout
+============== */
+body {
+	min-height:100%;
+/*	background: url(https://i.ibb.co/ZNGHMk4/darksteal.jpg) no-repeat; 
+	background-size: 2300px 1600px; 
+	background-position:  53% 30%; 
+*/
+	background: url(https://i.ibb.co/5TcvZsd/wp5141625.jpg) repeat;
+	background-repeat: repeat;
+	background-size: 671px 1191px;
+	background-attachment: fixed;
+	background-position:  50% 50%;
+}
+
+.myfantasyleague_menu,
+.pageheader,
+.pageheader .welcome,
+#league_reminders {display:none;}
+
+.pageheader {display:none;padding:0;margin:0 auto;border: 2px solid var(--darker-bg);}
+
+.pagebody {min-height:1200px;border-left: 4px solid var(--dark-bg);border-right: 4px solid var(--dark-bg);}
+.pagebody, table td {background: #000;}
+.pagefooter {background: var(--darker-bg)!important;border-top: 2px solid var(--dark-bg);border-right: 2px solid var(--dark-bg);border-left: 2px solid var(--dark-bg);border-right: 2px solid var(--dark-bg);}
+.pagefooter td {background: var(--darker-bg)!important;}
+
+.mobile-wrap {margin-bottom:0!important;border:0!important;}
+
+/* =============
+ Hide from Teams
+============== */
+.hidefromteams {display:none;}
+
+/* =============
+ Input boxes and links
+============== */
+input[type=text] {border-radius:0;}
+input[type=button], input[type=submit] {padding: 5px 20px!important;;background: var(--first-color);border:1px outset #fff;border-radius:0;}
+input[type=button]:hover, input[type=submit]:hover {border-style:inset;}
+
+a:link:hover,a:active:hover,a:visited:hover,a:hover, .reportfooter a:link, .reportfooter a:active, .reportfooter a:visited {color: var(--first-color);}
+
+.hint, .report .hint, td.hint {color: var(--warning-text);}
+.reportnavigationheader {color: var(--first-color);}
+.myfantasyleague_menu .report {border-left:1px solid var(--first-color);border-right:1px solid var(--first-color);}
+.myfantasyleague_tabmenu #homepagetabs li.currenttab, .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover {border-left:1px solid var(--first-color);border-right:1px solid var(--first-color);}
+.myfantasyleague_tabmenu #homepagetabs li:hover {border-left:1px solid var(--warning-text);border-right:1px solid var(--warning-text);}
+.myfantasyleague_tabmenu #homepagetabs li:hover a {color: var(--warning-text);}
+
+/* =============
+ MFL Horizontal Menu
+============== */
+#hsubmenu {margin-top:10px;border:1px solid var(--light-accent);}
+
+/* =============
+ MFL Menu
+============== */
+.myfantasyleague_menu .report {padding: 2px 0;}
+.myfantasyleague_menu .report tr:first-of-type th {padding-top:5px;}
+
+
+/* =============
+ Headers
+============== */
+h3, .reportnavigation {margin:2px 0!important;text-align:left;text-transform:none;font-family:Calibri;font-size:12px;color:#cc0;background: var(--mid-dark);background: linear-gradient(to top, var(--light-accent) 0%, var(--mid-dark) 45%, var(--mid-dark) 55%, var(--light-accent) 100%);border-bottom:1px solid #000;overflow:auto;white-space:nowrap;}
+h3 {padding: 0 10px!important;}
+.reportnavigation {padding:0px!important;}
+h3 a, .reportnavigation a, .reportnavigation .currentweek  {display:inline-block;margin-left:-1px;padding:10px;font-family:Calibri;font-size:12px;font-weight:normal;text-decoration:none!important;border:1px solid #000;border-top:0;border-bottom:0;}
+h3 a, .reportnavigation a {color:#fff!important;text-shadow: 0 1px 1px #000;background: linear-gradient(to top, var(--mid-dark) 0%, var(--light-accent) 45%, var(--light-accent) 55%, var(--mid-dark) 100%)!important;}
+.reportnavigation .currentweek {color:#000;font-weight:bold;background: linear-gradient(to top, var(--light-accent) 0%, #fff 45%, #fff 55%, var(--light-accent) 100%)}
+h3 a:hover, .reportnavigation a:hover {color:#fff!important;text-shadow: 0 0 0 #fff;background: var(--darker-bg);background: linear-gradient(to top, #a00 0%, var(--mid-dark) 35%, var(--mid-dark) 55%, var(--light-accent) 100%)!important;}
+.reportnavigationheader {color:#cc0;padding:10px;}
+.reportnavigation.hide {display:none;}
+.reportform {margin: 5px 0;padding:5px;background: var(--mid-darker);border:1px solid var(--mid-dark);border-radius:4px;}
+
+
+/* =============
+ homepagetabs 
+============== */
+.myfantasyleague_tabmenu {border:0;margin-top:10px;}
+.main_tabmenu {border:0;}
+.myfantasyleague_tabmenu #homepagetabs {text-align:center;border:0!important;}
+.myfantasyleague_tabmenu #homepagetabs li, .myfantasyleague_tabmenu #homepagetabs li:hover, .myfantasyleague_tabmenu #homepagetabs li.currenttab, .myfantasyleague_tabmenu #homepagetabs li.currenttab:hover {margin:5px;padding: 0 15px;background: url(https://i.ibb.co/ZNGHMk4/darksteal.jpg) no-repeat center center;border:0;border-left: 1px solid var(--light-accent);border-right: 1px solid var(--light-accent);border-radius:8px;}
+.myfantasyleague_tabmenu #homepagetabs li.currenttab a {color:#fff}
+.myfantasyleague_tabmenu #homepagetabs li:first-child {border-left:1px solid var(--light-accent);}
+.myfantasyleague_tabmenu #homepagetabs li:last-child {border-right:1px solid var(--light-accent);}
+.myfantasyleague_tabmenu #homepagetabs li.currenttab:hover a {color:#fff;}
+@media only screen and (max-width:48.000em){.myfantasyleague_tabmenu ul#homepagetabs li{border-left:1px solid;border-right:1px solid;}}
+
+#homepagetabs li a {text-decoration:none;}
+
+
+/* =============
+ table captions 
+============== */
+.report caption {
+	border:0!important;
+	height:10px;
+	margin-top:70px;
+	width:100%;
+	top:-25px;
+	position:relative;
+	background-color: var(--first-color)!important;
+	background: linear-gradient(to right, transparent 0%, var(--first-color) 10%, var(--first-color) 90%, transparent 100%)!important;
+}
+.report caption span {
+	white-space:nowrap;
+	overflow:hidden;
+	display:block;
+	position:relative;
+	top:-20px;
+	width:50%!important;
+	margin:auto;
+	font-family: 'Graduate', cursive;
+	text-align:center!important;
+	text-shadow: #000 3px 3px 3px;
+	color:#fff;
+	border-top:1px solid var(--mid-darker)!important;
+	border-bottom:1px solid var(--mid-darker)!important;
+	background:#000;
+	background: linear-gradient(to bottom, #000 0%, #000 45%, var(--darker-bg) 54%, var(--darker-bg) 100%)!important;
+	border-left:3px solid var(--first-color)!important;
+	border-right:3px solid var(--first-color)!important;
+	box-shadow: 0 0 15px rgba(141,114,30,0.9)!important;
+}
+.report caption.withfranchiseicon {padding:2px;}
+.report.nocaption {margin-top:20px;padding-top:10px;}
+span.ownername {display:none!important;}
+
+/* =============
+ tables 
+============== */
+.report {
+	padding-top: 0px;
+	padding-bottom: 10px;
+	border:0!important;
+	background-color: var(--first-color)!important;
+	background: linear-gradient(to right, transparent 0%, var(--first-color) 50%, transparent 100%)!important;
+}
+
+/* =============
+ Reset Captions to Default
+============== */
+#body_lineup .report caption, 
+#ScoreDetails .report caption, 
+#TeamDetails .report caption, 
+#MFLPlayerPopupContainer .report caption, 
+#MFLChatPopupContainer .report caption {position:initial;width:99.5%;height:auto;margin:auto;text-align:center;background:#000!important;border-bottom:1px solid var(--dark-bg)!important;box-shadow:0 0!important;}
+
+#body_lineup .report caption span,
+#ScoreDetails .report caption span, 
+#TeamDetails .report caption span, 
+#MFLPlayerPopupContainer .report caption span, 
+#MFLChatPopupContainer .report caption span {position:initial;display:inline;width:auto!important;background:transparent!important;border:0!important;box-shadow:0 0!important;}
+
+/* =============
+ table cells
+============== */
+.report th {background: var(--dark-bg);color: var(--light-accent);}
+.report th a {color: var(--light-accent);}
+
+table td {background:#000;}
+
+.reportfooter td {padding:0;font-size:14px;font-weight:bold;}
+
+
+/* =============
+ table rows/cells
+============== */
+.report .oddtablerow td {background:#000;}
+.report .eventablerow td {background: var(--darker-bg);}
+.oddtablerow.freeagentrow td, .eventablerow.freeagentrow td {background:#004;}
+.oddtablerow.myfranchise td, .eventablerow.myfranchise td {background:#040;}
+
+.report .newposition td {border-top: 3px solid var(--mid-dark)!important;}
+
+/* =============
+ table cells with franchiseicons
+============== */
+td.franchisename {width:1px;}
+td.ficon {width:1px;}
+
+
+/* =============
+ for commissioner 
+============== */
+#commissioner_setup table th {border-bottom:2px solid var(--first-color);}
+#commissioner_setup table li {color: var(--first-color);}
+#body_csetup_fcustom .pagebody .report tr:nth-child(2) td {background:#000;}
+#body_csetup_salaries .contractheader span {color:grey;font-weight:normal;font-size:12px;}
+#body_csetup_hmpgmsg h3, #body_message h3 {white-space:normal;}
+@media only screen and (min-width:1920px){#body_csetup_hmpgmsg h3 {position:absolute;left:25px;width:95vw;}#body_csetup_hmpgmsg #contentframe form {position:absolute;left:25px;margin-top:75px;width:95vw;background:#000;border:1px solid var(--light-accent);border-radius:5px;}#body_csetup_hmpgmsg #contentframe form textarea{height:600px;}#body_csetup_hmpgmsg #contentframe form .report{padding:0;margin:0;}#body_csetup_hmpgmsg #contentframe form p{margin:0;}#body_csetup_hmpgmsg #mvpbanner, #body_csetup_hmpgmsg .leaguelogo, #body_csetup_hmpgmsg .pagefooter {display:none;}#body_csetup_hmpgmsg .pagebody {padding:0;min-height:0;}}
+
+
+/* =============
+ League Banner
+============== */
+.leaguelogo {visibility:hidden;}
+#top #mvpbanner {display:none;}
+#mvpbanner {position:absolute;top:0;display:flex;flex-direction: column;width:100%;max-width:1146px;max-height:285px;text-align:center;background: linear-gradient(to right, var(--mid-dark) 0%, var(--first-color) 45%, var(--first-color) 55%, var(--mid-dark) 100%);border: 3px solid var(--dark-bg)!important;border-radius:0;-webkit-touch-callout: none;-webkit-user-select: none;-ms-user-select: none;user-select: none;}
+#mvpbanner .topborder {height:5vw;background: var(--dark-bg);border-bottom:5px solid var(--darker-bg);background: linear-gradient(to bottom, var(--darker-bg) 0%, #000 45%, #000 55%, var(--mid-darker) 100%);}
+#mvpbanner .bottomborder {bottom:0;position:relative;height:5vw;background: var(--dark-bg);border-top:5px solid var(--darker-bg);background: linear-gradient(to top, var(--darker-bg) 0%, #000 45%, #000 55%, var(--mid-darker) 100%);}
+#mvpbanner .first {
+font-size:9.5vw;
+font-family:graduate;font-weight:bold;
+background: -webkit-linear-gradient(#eee, #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 3px var(--darker-bg);
+
+}
+#mvpbanner .second {
+font-family:graduate;font-weight:bold;
+background: -webkit-linear-gradient(var(--mid-dark), #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+font-size:1.5vw;
+}
+#mvpbanner .third {
+margin-top: auto;
+font-family:graduate;font-weight:bold;
+background: -webkit-linear-gradient(var(--mid-dark), #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+font-size:1vw;
+}
+@media only screen and (min-width: 1145px){#mvpbanner .topborder, #mvpbanner .bottomborder{min-height:50px;}#mvpbanner .first {font-size:120px;}#mvpbanner .second {font-size:16px;}#mvpbanner .third {font-size:12px;}}
+@media only screen and (max-width: 1145px){#mvpbanner{margin-left:-5px;}}
+
+
+/* =============
+ Custom Menu
+============== */
+/* remove MFL menus */
+.leaguelogo {border:0;padding:0;}
+#hsubmenu {display:none;}
+.myfantasyleague_menu {display:none;}
+.icon-bar {display:none;}
+
+/* load and hide reports */
+#hiddenreports {display:none;}
+
+/* notification icon */
+span.newnotificationbg {position:relative;z-index:2;}
+span.newnotification {position:relative;z-index:1;top:-6px;margin-left:-4px;padding: 1px 3px;background:#c00;border-radius:10px;font-family: Arial, sans-serif;font-size:10px;color:#fff;text-shadow: 0 0;}
+#mvpmenu span.newnotification, #mvpsubmenu span.newnotification {display:none;}
+
+/* custom menu */
+#mvpmenu {width:100%;background: var(--dark-bg);overflow:auto;white-space:nowrap;background: var(--dark-bg);background: linear-gradient(to bottom, var(--mid-dark), var(--dark-bg));}
+#mvpmenu a {text-decoration:none;font-family: 'Graduate', cursive;cursor:pointer;text-shadow: 1px 1px 1px #000;}
+#mvpmenu ul {list-style-type: none;margin: 0;margin-left:3px;padding: 0;display:inline;}
+#mvpmenu li {display:inline-block;margin:0;margin-left:-5px;padding: 0px 1px 0px 1px;background: var(--darker-bg);background: linear-gradient(to top, var(--mid-dark), #000);}
+#mvpmenu li a {padding:14px 16px;display:inline-block;background: var(--dark-bg);background: linear-gradient(to bottom, var(--mid-dark), var(--dark-bg));}
+#mvpmenu li div {display:none;position:absolute;z-index:99999;margin-left:-1px;min-width:160px;border:1px solid var(--dark-bg);border-top:0;box-shadow: 0px 2px 4px #000;}
+#mvpmenu div a {display:block;padding:14px;font-family: Arial, sans-serif;font-size:14px;background: rgba(0,0,0,0.9);border:0;}
+
+#mvpmenu div dl {margin:0;}
+#mvpmenu div dd {margin:0;}
+
+ 
+#mvpmenu li:hover {background: var(--darker-bg);background: linear-gradient(to top, var(--mid-dark), var(--dark-bg));}
+#mvpmenu li:hover > a, #mvpmenu li div a:hover {background: var(--darker-bg);background: linear-gradient(to top, var(--mid-darker), #000);color: var(--first-color);}
+#mvpmenu li:hover div {display:block;}
+#mvpmenu li:nth-child(1) div {margin-left:1px;}
+
+#mvpmenu li:nth-child(5) dd:nth-of-type(5) a, #mvpmenu li:nth-child(5) dd:nth-of-type(7) a {border-top:1px solid var(--mid-darker);}
+
+/* sub menu*/
+#mvpsubmenu {overflow:auto;white-space:nowrap;padding-left:0px;width:100%;min-height:43px;background: var(--mid-dark);background: var(--dark-bg);background: linear-gradient(to top, var(--light-accent), var(--darker-bg));}
+#mvpsubmenu div {display:none;border-bottom:1px solid var(--darker-bg);padding-left:4px;}
+#mvpsubmenu dl {list-style-type: none;margin: 0;margin-left:0px;padding: 0;display:inline;background:transparent;}
+#mvpsubmenu dd {display:inline-block;margin:0;margin-left:-1px;padding: 0px 1px 0px 1px;background:transparent;}
+#mvpsubmenu dd a {display:inline-block;margin-left:-5px;padding:14px;text-decoration:none;font-weight:normal;color:#fff;font-family: Arial, sans-serif;font-size:12px;border-right:1px solid var(--darker-bg);vertical-align:center;background:transparent;}
+#mvpsubmenu a:hover {background: var(--darker-bg);}
+
+/* 3rd menu*/
+#mvpthirdmenu {overflow:auto;white-space:nowrap;padding:0;background: var(--darker-bg);}
+
+#menutrades {display:inline-block;padding:0!important;overflow:auto;white-space:nowrap;}
+#menutrades a {display:inline-block!important;padding:7px;background: var(--darker-bg);}
+#menutrades a:hover {background: var(--dark-bg);}
+
+#mvpthirdmenu div .report input {display:none;}
+
+/* =============
+ Menu: Module: Login
+============== */
+#mvpthirdmenu #usericon {float:right;margin-top:3px;margin-right:10px;width:25px;height:25px;cursor:pointer;
+background: url(/skins17/BackinBlack/commish_setup.png) no-repeat center center;background-size:cover;}
+#mvpthirdmenu #usericon div {width:25px;height:25px;}
+#usericon #welcome {display:none;position:absolute;z-index:99;width:0px;min-width:325px;margin-top:5px;margin-left:-190px;padding:2px;background:#000!important;border:3px solid var(--light-accent)!important;box-shadow: 0 4px 4px #000;}
+#usericon #welcome .report {margin-top:38px!important;margin-left:-5px!important;border-top:0!important;}
+#usericon #welcome caption {display:none;}
+#usericon #welcome td {padding:0;text-align:center;}
+#usericon #welcome td a {display:inline-block;padding:5px;}
+#usericon #welcome td a:hover {background: var(--mid-dark);}
+#mvpthirdmenu div #welcome.report input {display:inline-block;max-width:134px;}
+#mvpthirdmenu div #welcome.report .reportnavigation {background:#000;overflow:hidden;white-space:normal;line-height:10px;}
+
+/* =============
+ Menu: Module: IR Violation
+============== */
+#mvpthirdmenu #iricon {display:none;float:right;margin-top:3px;margin-right:10px;width:25px;height:25px;cursor:pointer;
+background: url(/skins17/BackinBlack/events.png) no-repeat center center;background-size:cover;}
+#mvpthirdmenu #iricon div {width:25px;height:25px;}
+#mvpthirdmenu #iricon .newnotification {top:-2px;margin-left:18px;color:#000;background: var(--first-color);}
+#iricon #ir_violations {display:none;position:absolute;z-index:99;width:0px;margin-top:5px;margin-left:-70px;padding:2px;background:#000!important;border:3px solid var(--light-accent)!important;box-shadow: 0 4px 4px #000;}
+#ir_violations .franchiseicon {max-width: 250px;max-height: 40px;}
+#ir_violations input[type=button] {width:97%;}
+
+/* =============
+ Menu: Module: Invalid lineup
+============== */
+#mvpthirdmenu #invlu_icon {display:none;float:right;margin-top:3px;margin-right:10px;width:25px;height:25px;cursor:pointer;
+background: url(/skins17/BackinBlack/group.png) no-repeat center center;background-size:cover;}
+#mvpthirdmenu #invlu_icon div {width:25px;height:25px;}
+#mvpthirdmenu #invlu_icon .newnotification {top:-2px;margin-left:18px;color:#000;background: var(--first-color);}
+#invlu_icon #InvalidLineup {display:none;position:absolute;z-index:99;width:0px;margin-top:5px;margin-left:-70px;padding:2px;background:#000!important;border:3px solid var(--light-accent)!important;box-shadow: 0 4px 4px #000;}
+#InvalidLineup .franchiseicon {max-width: 250px;max-height: 40px;}
+#InvalidLineup input[type=button] {width:97%;}
+
+/* =============
+ Menu: Module: Player Search
+============== */
+#mvpthirdmenu #player_search {float:right;width:auto;margin:1px;padding:0;background:transparent!important;}
+#mvpthirdmenu #player_search caption, #mvpthirdmenu #player_search th {display:none;}
+#mvpthirdmenu #player_search tr, #mvpthirdmenu #player_search td {background:transparent;}
+#mvpthirdmenu #player_search input {margin:0;border-radius:0;padding:3px!important;}
+#mvpthirdmenu #player_search input:nth-child(2) {width:100px;background:#fff;color:#000;border:1px solid var(--light-accent);}
+#mvpthirdmenu #player_search input:nth-child(3) {margin-left:-2px;background: var(--mid-dark);color:#fff;border:1px solid var(--light-accent);}
+
+/* =============
+ Menu: Responsive Settings
+============== */
+@media only screen and (max-width:636px){#mvpmenu li:nth-child(6) div {margin-left:-58px;}}
+@media only screen and (max-width:584px){#mvpmenu ul {display: flex;}#mvpmenu li {flex:1;text-align:center;}#mvpmenu li a {width:100%;padding:14px 0px;padding-right:4px;}#mvpmenu li div {left:5px;width:98%;text-align:left;}#mvpmenu li:nth-child(1) div, #mvpmenu li:nth-child(6) div {margin-left:-1px;}#mvpmenu div a{padding-left:30px;}}
+@media only screen and (max-width:490px){#mvpmenu li a{font-size:2.3vw;}#mvpmenu li div a {font-size:12px;}}
+/*
+@media only screen and (max-width:520px){#mvpmenu li div {left:0;width:99.7%;}#mvpmenu li:nth-child(6) div {margin-left:0;}#mvpmenu div a{padding-left:30px;}}
+*/
+
+/* =============
+ Menu: Display Secondary Menu
+============== */
+/* League */
+#body_options_07 #mvpsubmenu #leaguesubmenu, 
+#body_options_105 #mvpsubmenu #leaguesubmenu, 
+#body_options_138 #mvpsubmenu #leaguesubmenu, 
+#body_options_133 #mvpsubmenu #leaguesubmenu, 
+#body_options_03 #mvpsubmenu #leaguesubmenu,
+#body_standings #mvpsubmenu #leaguesubmenu, 
+#body_board_show #mvpsubmenu #leaguesubmenu,
+#body_options_156 #mvpsubmenu #leaguesubmenu,
+#body_options_157 #mvpsubmenu #leaguesubmenu,
+#body_options_158 #mvpsubmenu #leaguesubmenu,
+#body_options_171 #mvpsubmenu #leaguesubmenu,
+#body_options_194 #mvpsubmenu #leaguesubmenu,
+#body_options_202 #mvpsubmenu #leaguesubmenu,
+#body_options_204 #mvpsubmenu #leaguesubmenu,
+#body_options_208 #mvpsubmenu #leaguesubmenu,
+#body_options_232 #mvpsubmenu #leaguesubmenu,
+#body_options_120 #mvpsubmenu #leaguesubmenu,
+#body_options_121 #mvpsubmenu #leaguesubmenu,
+#body_options_122 #mvpsubmenu #leaguesubmenu,
+#body_options_179 #mvpsubmenu #leaguesubmenu,
+#body_options_180 #mvpsubmenu #leaguesubmenu,
+#body_options_01 #mvpsubmenu #leaguesubmenu,
+#body_options_218 #mvpsubmenu #leaguesubmenu,
+#body_options_26 #mvpsubmenu #leaguesubmenu,
+#body_options_09 #mvpsubmenu #leaguesubmenu,
+/* My Team */
+#body_options_05 #mvpsubmenu #myteamsubmenu, 
+#body_trade_offer #mvpsubmenu #myteamsubmenu, 
+#body_trade_response #mvpsubmenu #myteamsubmenu, 
+#body_options_257 #mvpsubmenu #myteamsubmenu,
+#body_lineup #mvpsubmenu #myteamsubmenu,
+#body_options_210 #mvpsubmenu #myteamsubmenu,
+#body_news_articles.myplayers #mvpsubmenu #myteamsubmenu,
+#body_options_205 #mvpsubmenu #myteamsubmenu,
+#body_options_18 #mvpsubmenu #myteamsubmenu,
+#body_options_98 #mvpsubmenu #myteamsubmenu,
+#body_csetup_franchise #mvpsubmenu #myteamsubmenu,
+#body_csetup_fcustom #mvpsubmenu #myteamsubmenu,
+#body_csetup_funlink #mvpsubmenu #myteamsubmenu,
+#body_csetup_faccess #mvpsubmenu #myteamsubmenu,
+#body_csetup_fcontact #mvpsubmenu #myteamsubmenu,
+#body_csetup_fmobile #mvpsubmenu #myteamsubmenu,
+#body_options_234 #mvpsubmenu #myteamsubmenu,
+/* Players */
+#body_options_08 #mvpsubmenu #playerssubmenu, 
+.topplayerreport #mvpsubmenu #playerssubmenu, 
+#body_options_37 #mvpsubmenu #playerssubmenu, 
+#body_options_236 #mvpsubmenu #playerssubmenu, 
+#body_news_articles.allplayers #mvpsubmenu #playerssubmenu, 
+#body_options_185 #mvpsubmenu #playerssubmenu, 
+#body_options_178 #mvpsubmenu #playerssubmenu, 
+#body_injury #mvpsubmenu #playerssubmenu, 
+#body_options_117 #mvpsubmenu #playerssubmenu, 
+#body_player_search #mvpsubmenu #playerssubmenu, 
+#body_add_drop #mvpsubmenu #playerssubmenu, 
+#body_options_43 #mvpsubmenu #playerssubmenu, 
+/* Matchups */
+#body_ajax_ls #mvpsubmenu #matchupssubmenu,
+#body_options_06 #mvpsubmenu #matchupssubmenu,
+#body_options_15 #mvpsubmenu #matchupssubmenu,
+#body_options_16 #mvpsubmenu #matchupssubmenu,
+#body_options_54 #mvpsubmenu #matchupssubmenu,
+#body_options_22 #mvpsubmenu #matchupssubmenu,
+#body_options_31 #mvpsubmenu #matchupssubmenu,
+#body_options_207 #mvpsubmenu #matchupssubmenu,
+#body_options_177 #mvpsubmenu #matchupssubmenu, 
+#body_site_news #mvpsubmenu #matchupssubmenu, 
+/* Draft */
+#body_options_17 #mvpsubmenu #draftsubmenu,
+#body_options_215 #mvpsubmenu #draftsubmenu,
+#body_options_209 #mvpsubmenu #draftsubmenu,
+#body_options_113 #mvpsubmenu #draftsubmenu,
+#body_options_182 #mvpsubmenu #draftsubmenu,
+#body_options_129 #mvpsubmenu #draftsubmenu,
+#body_csetup_draftpref #mvpsubmenu #draftsubmenu,
+#body_options_100 #mvpsubmenu #draftsubmenu,
+#body_options_102 #mvpsubmenu #draftsubmenu,
+#body_options_44 #mvpsubmenu #draftsubmenu,
+#body_options_254 #mvpsubmenu #draftsubmenu,
+#body_processed_waivers #mvpsubmenu #draftsubmenu,
+/* Research */
+#body_options_230 #mvpsubmenu #researchsubmenu, 
+#body_options_20 #mvpsubmenu #researchsubmenu, 
+#body_options_23 #mvpsubmenu #researchsubmenu, 
+#body_options_39 #mvpsubmenu #researchsubmenu, 
+#body_options_243 #mvpsubmenu #researchsubmenu, 
+#body_options_153 #mvpsubmenu #researchsubmenu, 
+#body_options_142 #mvpsubmenu #researchsubmenu  {display:block;}
+
+
+/* =============
+ Menu: Highlight Menu Tabs
+============== */
+#mvpmenu .mvpmenuactive, 
+/* League */
+#body_options_07 #mvpmenu #leagueli > a,
+#body_options_105 #mvpmenu #leagueli > a,
+#body_options_138 #mvpmenu #leagueli > a,
+#body_options_133 #mvpmenu #leagueli > a,
+#body_options_03 #mvpmenu #leagueli > a,
+#body_standings #mvpmenu #leagueli > a,
+#body_board_show #mvpmenu #leagueli > a,
+#body_options_156 #mvpmenu #leagueli > a,
+#body_options_157 #mvpmenu #leagueli > a,
+#body_options_158 #mvpmenu #leagueli > a,
+#body_options_171 #mvpmenu #leagueli > a,
+#body_options_194 #mvpmenu #leagueli > a,
+#body_options_202 #mvpmenu #leagueli > a,
+#body_options_204 #mvpmenu #leagueli > a,
+#body_options_208 #mvpmenu #leagueli > a,
+#body_options_232 #mvpmenu #leagueli > a,
+#body_options_120 #mvpmenu #leagueli > a,
+#body_options_121 #mvpmenu #leagueli > a,
+#body_options_122 #mvpmenu #leagueli > a,
+#body_options_179 #mvpmenu #leagueli > a,
+#body_options_180 #mvpmenu #leagueli > a,
+#body_options_01 #mvpmenu #leagueli > a,
+#body_options_218 #mvpmenu #leagueli > a,
+#body_options_26 #mvpmenu #leagueli > a,
+#body_options_09 #mvpmenu #leagueli > a,
+/* My Team */
+#body_options_05 #mvpmenu #myteamli > a,
+#body_trade_offer #mvpmenu #myteamli > a,
+#body_trade_response #mvpmenu #myteamli > a,
+#body_options_257 #mvpmenu #myteamli > a,
+#body_lineup #mvpmenu #myteamli > a,
+#body_options_210 #mvpmenu #myteamli > a,
+#body_news_articles.myplayers #mvpmenu #myteamli > a,
+#body_options_205 #mvpmenu #myteamli > a,
+#body_options_18 #mvpmenu #myteamli > a,
+#body_options_98 #mvpmenu #myteamli > a,
+#body_csetup_franchise #mvpmenu #myteamli > a,
+#body_csetup_fcustom #mvpmenu #myteamli > a,
+#body_csetup_funlink #mvpmenu #myteamli > a,
+#body_csetup_faccess #mvpmenu #myteamli > a,
+#body_csetup_fcontact #mvpmenu #myteamli > a,
+#body_csetup_fmobile #mvpmenu #myteamli > a,
+#body_options_234 #mvpmenu #myteamli > a,
+/* Players */
+#body_options_08 #mvpmenu #playersli > a,
+.topplayerreport #mvpmenu #playersli > a,
+#body_options_37 #mvpmenu #playersli > a,
+#body_options_236 #mvpmenu #playersli > a,
+#body_news_articles.allplayers #mvpmenu #playersli > a,
+#body_options_185 #mvpmenu #playersli > a,
+#body_options_178 #mvpmenu #playersli > a,
+#body_injury #mvpmenu #playersli > a,
+#body_options_117 #mvpmenu #playersli > a,
+#body_player_search #mvpmenu #playersli > a,
+#body_add_drop #mvpmenu #playersli > a,
+#body_options_43 #mvpmenu #playersli > a,
+/* Matchups */
+#body_ajax_ls #mvpmenu #matchupsli > a,
+#body_options_06 #mvpmenu #matchupsli > a,
+#body_options_15 #mvpmenu #matchupsli > a,
+#body_options_16 #mvpmenu #matchupsli > a,
+#body_options_54 #mvpmenu #matchupsli > a,
+#body_options_22 #mvpmenu #matchupsli > a,
+#body_options_31 #mvpmenu #matchupsli > a,
+#body_options_207 #mvpmenu #matchupsli > a,
+#body_options_177 #mvpmenu #matchupsli > a,
+#body_site_news #mvpmenu #matchupsli > a,
+/* Draft */
+#body_options_17 #mvpmenu #draftli > a,
+#body_options_215 #mvpmenu #draftli > a,
+#body_options_209 #mvpmenu #draftli > a,
+#body_options_113 #mvpmenu #draftli > a,
+#body_options_182 #mvpmenu #draftli > a,
+#body_options_129 #mvpmenu #draftli > a,
+#body_csetup_draftpref #mvpmenu #draftli > a,
+#body_options_100 #mvpmenu #draftli > a,
+#body_options_102 #mvpmenu #draftli > a,
+#body_options_44 #mvpmenu #draftli > a,
+#body_options_254 #mvpmenu #draftli > a,
+#body_processed_waivers #mvpmenu #draftli > a,
+/* Research */
+#body_options_230 #mvpmenu #researchli > a,
+#body_options_20 #mvpmenu #researchli > a,
+#body_options_23 #mvpmenu #researchli > a,
+#body_options_39 #mvpmenu #researchli > a,
+#body_options_243 #mvpmenu #researchli > a,
+#body_options_153 #mvpmenu #researchli > a,
+#body_options_142 #mvpmenu #researchli > a {background: var(--darker-bg);background: linear-gradient(to top, var(--darker-bg), var(--mid-darker));color: var(--first-color);}
+
+
+
+/* =============
+ Menu: Highlight Secondary Menu Tabs
+============== */
+ /* Active tabs created through jquery */
+#mvpsubmenu .mvpsubmenuactive, 
+
+/* Uncategorized */
+#body_standings dd.menustandings a, 
+#body_options_230 dd.menuplayoffs a, 
+/* League */
+#body_options_07 #leaguesubmenu dd:nth-of-type(2) a,
+#body_options_105 #leaguesubmenu dd:nth-of-type(2) a,
+#body_options_138 #leaguesubmenu dd:nth-of-type(2) a,
+#body_options_133 #leaguesubmenu dd:nth-of-type(3) a,
+#body_options_03 #leaguesubmenu dd:nth-of-type(4) a,
+#body_board_show #leaguesubmenu dd:nth-of-type(7) a,
+#body_options_156 #leaguesubmenu dd:nth-of-type(8) a,
+#body_options_157 #leaguesubmenu dd:nth-of-type(8) a,
+#body_options_158 #leaguesubmenu dd:nth-of-type(8) a,
+#body_options_171 #leaguesubmenu dd:nth-of-type(8) a,
+#body_options_194 #leaguesubmenu dd:nth-of-type(8) a,
+#body_options_202 #leaguesubmenu dd:nth-of-type(8) a,
+#body_options_204 #leaguesubmenu dd:nth-of-type(8) a,
+#body_options_208 #leaguesubmenu dd:nth-of-type(8) a,
+#body_options_232 #leaguesubmenu dd:nth-of-type(8) a,
+#body_options_120 #leaguesubmenu dd:nth-of-type(9) a,
+#body_options_121 #leaguesubmenu dd:nth-of-type(9) a,
+#body_options_122 #leaguesubmenu dd:nth-of-type(9) a,
+#body_options_179 #leaguesubmenu dd:nth-of-type(9) a,
+#body_options_180 #leaguesubmenu dd:nth-of-type(9) a,
+#body_options_01 #leaguesubmenu dd:nth-of-type(10) a,
+#body_options_218 #leaguesubmenu dd:nth-of-type(10) a,
+#body_options_26 #leaguesubmenu dd:nth-of-type(11) a, 
+#body_options_09 #leaguesubmenu dd:nth-of-type(11) a, 
+/* My Team */
+#body_lineup #myteamsubmenu dd:nth-of-type(1) a,
+#body_options_210 #myteamsubmenu dd:nth-of-type(1) a, 
+#body_options_05 #myteamsubmenu dd:nth-of-type(3) a, 
+#body_trade_offer #myteamsubmenu dd:nth-of-type(3) a, 
+#body_trade_response #myteamsubmenu dd:nth-of-type(3) a, 
+#body_news_articles.myplayers #myteamsubmenu dd:nth-of-type(4) a,
+#body_options_205 #myteamsubmenu dd:nth-of-type(4) a, 
+#body_options_18 #myteamsubmenu dd:nth-of-type(5) a, 
+#body_options_98 #myteamsubmenu dd:nth-of-type(6) a, 
+#body_csetup_franchise #myteamsubmenu dd:nth-of-type(7) a,
+#body_csetup_fcustom #myteamsubmenu dd:nth-of-type(7) a,
+#body_csetup_funlink #myteamsubmenu dd:nth-of-type(7) a,
+#body_csetup_faccess #myteamsubmenu dd:nth-of-type(7) a,
+#body_csetup_fcontact #myteamsubmenu dd:nth-of-type(7) a,
+#body_csetup_fmobile #myteamsubmenu dd:nth-of-type(7) a,
+#body_options_234 #myteamsubmenu dd:nth-of-type(7) a, 
+/* Players */
+#body_options_08 #playerssubmenu dd:nth-of-type(1) a, 
+.topplayerreport #playerssubmenu dd:nth-of-type(1) a, 
+#body_options_37 #playerssubmenu dd:nth-of-type(1) a, 
+#body_options_236 #playerssubmenu dd:nth-of-type(1) a, 
+#body_news_articles.allplayers #playerssubmenu dd:nth-of-type(2) a, 
+#body_options_185 #playerssubmenu dd:nth-of-type(2) a, 
+#body_options_178 #playerssubmenu dd:nth-of-type(3) a, 
+#body_injury #playerssubmenu dd:nth-of-type(4) a, 
+#body_options_117 #playerssubmenu dd:nth-of-type(5) a, 
+/* Matchups */
+#body_ajax_ls #matchupssubmenu dd:nth-of-type(1) a,
+#body_options_06 #matchupssubmenu dd:nth-of-type(2) a,
+#body_options_15 #matchupssubmenu dd:nth-of-type(3) a,
+#body_options_16 #matchupssubmenu dd:nth-of-type(3) a,
+#body_options_54 #matchupssubmenu dd:nth-of-type(3) a,
+#body_options_22 #matchupssubmenu dd:nth-of-type(4) a,
+#body_options_31 #matchupssubmenu dd:nth-of-type(5) a,
+#body_options_207 #matchupssubmenu dd:nth-of-type(6) a,
+#body_options_177 #matchupssubmenu dd:nth-of-type(7) a, 
+#body_site_news #matchupssubmenu dd:nth-of-type(8) a, 
+/* Draft */
+#body_options_17 #draftsubmenu dd:nth-of-type(1) a, 
+#body_options_215 #draftsubmenu dd:nth-of-type(1) a, 
+#body_options_209 #draftsubmenu dd:nth-of-type(1) a, 
+#body_options_113 #draftsubmenu dd:nth-of-type(1) a, 
+#body_options_182 #draftsubmenu dd:nth-of-type(1) a, 
+#body_options_129 #draftsubmenu dd:nth-of-type(2) a, 
+#body_csetup_draftpref #draftsubmenu dd:nth-of-type(3) a, 
+#body_options_100 #draftsubmenu dd:nth-of-type(4) a, 
+#body_options_102 #draftsubmenu dd:nth-of-type(5) a, 
+#body_options_44 #draftsubmenu dd:nth-of-type(6) a, 
+#body_options_254 #draftsubmenu dd:nth-of-type(7) a, 
+#body_processed_waivers #draftsubmenu dd:nth-of-type(8) a, 
+/* Research */
+#body_options_20 #researchsubmenu dd:nth-of-type(1) a, 
+#body_options_23 #researchsubmenu dd:nth-of-type(2) a, 
+#body_options_39 #researchsubmenu dd:nth-of-type(2) a, 
+#body_options_243 #researchsubmenu dd:nth-of-type(2) a, 
+#body_options_153 #researchsubmenu dd:nth-of-type(3) a, 
+#body_options_142 #researchsubmenu dd:nth-of-type(4) {font-weight:bold;color: var(--first-color);background: var(--darker-bg);}
+
+/* =============
+ Player pickerboxes
+============== */
+.report table .pickerbox tr td {padding:0;background:#fff!important;}
+.report table .pickerbox tr:hover td {background:#000!important;}
+#add_drop table .pickerbox tr td {padding:0;background:#fff!important;}
+#add_drop table .pickerbox tr:hover td {background:#000!important;}
+#options_257 .report td .pickerbox tr td {background:#fff!important;padding: 0 4px;}
+#options_257 .report td .pickerbox tr:hover td {background: var(--dark-bg)!important;}
+#options_257 .report td .pickerbox tr.highlight td, #body_add_drop table td .pickerbox tr.highlight td {background:#900!important;}
+#options_178 td .pickerbox tr td {background:#fff!important;padding: 0 4px;}
+#options_178 td .pickerbox tr:hover td {background: var(--dark-bg)!important;}
+#options_178 td .pickerbox tr.highlight td {background:#900!important;}
+
+/* =============
+	Other
+============== */
+.notification-icon-search{}
+div.hs_toggle_settings {color:#fff;}
+/* custom small team banners */
+.smallfranchiseicon {width: 75px;}
+
+
+/* =============
+ Layout: Loading  
+============== */
+.MFLPlayerPopupLoader {border-color: var(--second-color);border-top-color: var(--light-accent);}
+#global_loader {display:none;}
+#body_ajax_ls  #global_loader {display:block;}
+
+#body_top #mvpbody .report {display:none;}
+#body_ajax_ls .report:nth-child(6), #body_ajax_ls #ls_ticker_tab_id {display:none;}
+#body_ajax_ls #contentframe p {display:none;}
+
+/* =============
+ Layout: Player Popup
+============== */
+#MFLPlayerPopupContainer{height:31.59rem}
+#MFLPlayerPopupContainer {}
+#MFLPlayerPopupContainer #MFLPlayerPopupClose {top:8px;right:8px;border-color:#fff;background: var(--second-color);border-width:3px;}
+#MFLPlayerPopupContainer .report {border:5px solid var(--second-color)!important;border-radius:5px;background:#000!important;}
+
+/* =============
+ Layout: Custom Tabs 
+============== */
+.customtabs {margin-top:2px;text-align:center;text-transform:none;font-family: Arial, sans-serif;font-size:12px;color:#fff;background: var(--mid-dark);background: linear-gradient(to top, var(--darker-bg) 0%, var(--mid-dark) 45%, var(--mid-dark) 55%, var(--darker-bg) 100%);border-top:3px solid var(--first-color);border-bottom:3px solid var(--first-color);overflow:auto;white-space:nowrap;}
+.customtabs a {display:inline-block;margin-left:-1px;padding:20px;font-size:14px;border:1px solid #000;border-top:0;border-bottom:0;cursor:pointer;text-decoration:none!important;font-weight:bold;color:#fff;text-shadow: 0 1px 1px #000;background: linear-gradient(to top, var(--darker-bg) 0%, var(--mid-dark) 35%, var(--light-accent) 75%, var(--darker-bg) 100%);}
+.customtabs a:hover {color: var(--first-color);font-weight:bold;background: var(--darker-bg);background: linear-gradient(to top, var(--first-color) 0%, var(--light-accent) 45%, var(--mid-dark) 55%, var(--darker-bg) 100%);}
+.customtabs a.selectedtab, .customtabs a.selectedtab:hover {color: var(--first-color);background: var(--mid-darker);background: linear-gradient(to top, var(--first-color) 0%, var(--mid-darker) 15%, var(--mid-darker) 25%, var(--mid-darker) 75%, var(--first-color) 100%);}
+
+.customtabcontent {display:none;}.selectedcontent {display:block;}
+.customtabcontent .report {padding-bottom:0;}
+.customtabcontent .report caption {display:none;margin-top:55px;}
+.customtabcontent .report th:first-child {width:1px;}
+
+.standingstabs {width:auto!important;min-width:964px;margin:auto;}
+@media only screen and (max-width: 1160px) {.standingstabs {min-width:100%;}.customtabs {text-align:left;}}
+
+
+/* =============
+ Layout: SVG Icons
+============== */
+.svg-iconlink:active:hover,.svg-iconlink:link:hover,.svg-iconlink:visited:hover{
+	color: var(--first-color);
+}
+.svg-icon:hover,.svg-iconlink:hover .svg-icon{
+	fill:#ddd;
+	color: var(--first-color);
+}
+.svg-icon{
+	fill: var(--first-color);
+	color:#ddd;
+} 
+
+/* =============
+ Module: Event Center
+============== */
+#eventcenter .eventborder {
+	height:10px;
+	background-color: var(--first-color);
+	background: linear-gradient(to right, transparent 0%, var(--first-color) 25%, var(--first-color) 75%, transparent 100%);
+}
+#eventcenter h3 {
+	background-color: var(--first-color)!important;
+	background: linear-gradient(to right, transparent 0%, var(--first-color) 45%, var(--first-color) 55%, transparent 100%)!important;
+}
+#eventcenter h1 {
+	border-left:3px solid var(--first-color);
+	border-right:3px solid var(--first-color);
+	box-shadow: 0 0 15px rgba(141,114,30,0.9);
+}
+
+/* =============
+ Module - Champ Plaque 
+============== */
+.homepagemodule#championship_plaque, .homepagemodule .plaqueframe, .homepagemodule .plaque {border:0!important;}
+.homepagemodule#championship_plaque .flex {padding:0;}
+.homepagemodule#championship_plaque h2 {
+	position:relative;
+	top:30px;
+	margin:auto;
+	padding:10px;
+	width:70%;
+	font-family: 'Graduate', cursive;
+	text-shadow: #000 3px 3px 3px;
+	color: var(--second-color);
+	background:#000!important;
+	background: linear-gradient(to bottom, #000 0%, #000 45%, var(--darker-bg) 54%, var(--darker-bg) 100%)!important;
+	border-top:1px solid var(--mid-darker)!important;
+	border-bottom:1px solid var(--mid-darker)!important;
+	border-left:3px solid var(--first-color)!important;
+	border-right:3px solid var(--first-color)!important;
+	box-shadow: 0 0 15px rgba(141,114,30,0.9);
+
+}
+.homepagemodule#championship_plaque caption {display:none;}
+.homepagemodule#championship_plaque .plaque {background: #000 url();}
+.homepagemodule .plaque div{border-top:8px groove var(--mid-dark);margin-top:80px!important;padding-bottom:60px;
+background: url(https://i.ibb.co/1QwX3Qh/banners.png) no-repeat;
+background-size:555%!important;background-position: 65.6% 0%!important;
+}
+.homepagemodule .plaque div h3 {color:#000!imporatant;text-shadow: #000 1px 1px 1px;font-size:32px!important;font-family:FontAwesome;white-space:normal;overflow:hidden;height:auto!important;padding-top:20px!important;padding-bottom:20px!important;}
+.homepagemodule .plaque div h4{width:90%;margin:auto;font-family: 'Graduate', cursive;font-size:16px!important;}
+.homepagemodule .plaque div p{padding-top:30px;text-transform:uppercase;}
+
+
+/* =============
+ Module: League Chat
+============== */
+#league_chat .franchiseicon {max-width:120px;height:auto;padding:1px 2px}
+#league_chat input[type=text]#chat_text_field {width:83%!important;padding: 5px 0!important;}
+#league_chat input[type=button] {width:15%;padding: 5px 0!important;}
+@media only screen and (max-width:810px){#league_chat input[type=text]#chat_text_field {width:82%!important;}}
+.pagebody #league_chat.homepagemodule td:nth-child(2) img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+}
+
+/* =============
+ Module: League Chat Popup
+============== */
+#MFLChatPopupContainer {border:5px solid #fff;border-radius:5px;background:#000;}
+#MFLChatPopupContainer #MFLPlayerPopupClose {top:3px;right:3px;border-color:#fff;background:#a00;border-width:3px;}
+#MFLChatPopupContainer .report {background:#000!important;margin-bottom:0;}
+
+/* =============
+ Module: Mini Chat 
+============== */
+#minichat2_wrapper {background-color:#000;border:1px solid var(--mid-darker);border-bottom:0;box-shadow: -5px -5px 12px #000;}
+#minichat2_caption {background-color:#000;border-bottom:4px solid var(--first-color);}
+#minichat2_container tr {background-color:#000}
+#minichat2_container tr.oddtablerow {background-color:#000}
+.minichat2_blink {color:white;background-color:red!important}
+.minichat2_blinkText {}
+#minichat2_chatTable tr.oddtablerow {background-color: var(--darker-bg)!important}
+#minichat2_chatTable{font-size:smaller}
+#minichat2_chatTable img {height:20px; width:auto;}
+#minichat2_chatTable .minichat2_icon {}
+#minichat2_chatTable .minichat2_logo {}
+.minichat2_time{font-size:xx-small;font-style:italic;color: var(--mid-dark)}
+
+#minichat2_privateMessageWrapper span {font-size:smaller;}
+#minichat2_privateMessageWrapper select {font-size:smaller;}
+
+#minichat2_onlineTitle {font-size:smaller}
+#minichat2_onlineList {font-size:smaller}
+
+span#minichat2_maximize {padding:5px;}
+span#minichat2_minimize {padding:5px;}
+
+/* =============
+ Module: Notification Slide Down 
+============== */
+.notification-message {font-weight:bold;height:40px;line-height:40px}
+  .notification-default {background-color: var(--light-accent);color:#000;border-bottom:2px solid #000}
+  .notification-online {background-color: var(--light-accent);color:#000;border-bottom:2px solid #000;}
+  .notification-trade {background-color:#0a0;color:#fff;border-bottom:2px solid #000;}
+  .notification-ir {background-color: var(--light-accent);color:#000;border-bottom:2px solid #000}
+  .notification-success {background-color:#04b404;color: var(--light-accent);border-bottom:2px solid var(--light-accent);}
+  .notification-fail {background-color:#ff0000;color:#fff;border-bottom:2px solid #000}
+  .notification-warning {background-color:#ff4500;color:#fff;border-bottom:2px solid #0000}
+
+/* =============
+ Module: Monthly calendar
+============== */
+#monthly_calendar.report {display:none;}
+#monthly_calendar tr:first-of-type th {padding-top:30px;}
+
+/* =============
+ Module: Power Rank
+============== */
+#power_rank td:nth-of-type(2) {white-space:nowrap;}
+
+/* =============
+ Module & Page - Standings
+============== */
+#body_standings .report, .homepagemodule#standings {max-width:972px;border:1px solid var(--darker-bg);}
+
+/* =============
+ Page - Options 02 - Lineup
+============== */
+#body_lineup #lineup .warning {color:#a00;}
+/* unhide columns on rosters report */
+@media only screen and (max-width:1200px){#roster.report td {height:40px;}}
+
+@media only screen and (max-width:1050px){#roster tr td:nth-of-type(8),#roster tr th:nth-of-type(8),#roster tr th[colspan="2"] + th + th + th + th + th,#roster tr th[colspan="3"] + th + th + th + th + th,#roster tr th[colspan="4"] + th + th + th + th + th,.rosters_trades_display #roster tr td:nth-of-type(9),.rosters_trades_display #roster tr th:nth-of-type(9),.rosters_trades_display #roster tr th[colspan="2"] + th + th + th + th + th,.rosters_trades_display #roster tr th[colspan="3"] + th + th + th + th + th,.rosters_trades_display #roster tr th[colspan="4"] + th + th + th + th + th{display:table-cell!important}}@media only screen and (max-width:900px){#roster tr td:nth-of-type(7),#roster tr th:nth-of-type(7),#roster tr th[colspan="2"]+th+th+th+th,#roster tr th[colspan="3"]+th+th+th+th,#roster tr th[colspan="4"]+th+th+th+th,.rosters_trades_display #roster tr td:nth-of-type(8),.rosters_trades_display #roster tr th:nth-of-type(8),.rosters_trades_display #roster tr th[colspan="2"]+th+th+th+th,.rosters_trades_display #roster tr th[colspan="3"]+th+th+th+th,.rosters_trades_display #roster tr th[colspan="4"]+th+th+th+th{display:table-cell!important}}@media only screen and (max-width:850px){#roster tr td:nth-of-type(6),#roster tr th:nth-of-type(6),#roster tr th[colspan="2"]+th+th+th,#roster tr th[colspan="3"]+th+th+th,#roster tr th[colspan="4"]+th+th+th,.rosters_trades_display #roster tr td:nth-of-type(7),.rosters_trades_display #roster tr th:nth-of-type(7),.rosters_trades_display #roster tr th[colspan="2"]+th+th+th,.rosters_trades_display #roster tr th[colspan="3"]+th+th+th,.rosters_trades_display #roster tr th[colspan="4"]+th+th+th{display:table-cell!important}}@media only screen and (max-width:750px){#roster tr td:nth-of-type(5),#roster tr th:nth-of-type(5),#roster tr th[colspan="2"]+th+th,#roster tr th[colspan="3"]+th+th,#roster tr th[colspan="4"]+th+th,.rosters_trades_display #roster tr td:nth-of-type(6),.rosters_trades_display #roster tr th:nth-of-type(6),.rosters_trades_display #roster tr th[colspan="2"]+th+th,.rosters_trades_display #roster tr th[colspan="3"]+th+th,.rosters_trades_display #roster tr th[colspan="4"]+th+th{display:table-cell!important}}@media only screen and (max-width:540px){#roster tr td:nth-of-type(8),#roster tr th:nth-of-type(8),#roster tr th[colspan="2"]+th+th+th+th+th,#roster tr th[colspan="3"]+th+th+th+th+th,#roster tr th[colspan="4"]+th+th+th+th+th,.rosters_trades_display #roster tr td:nth-of-type(9),.rosters_trades_display #roster tr th:nth-of-type(9),.rosters_trades_display #roster tr th[colspan="2"]+th+th+th+th+th,.rosters_trades_display #roster tr th[colspan="3"]+th+th+th+th+th,.rosters_trades_display #roster tr th[colspan="4"]+th+th+th+th+th{display:table-cell!important}}@media only screen and (max-width:500px){#roster tr td:nth-of-type(7),#roster tr th:nth-of-type(7),#roster tr th[colspan="2"]+th+th+th+th,#roster tr th[colspan="3"]+th+th+th+th,#roster tr th[colspan="4"]+th+th+th+th,.rosters_trades_display #roster tr td:nth-of-type(8),.rosters_trades_display #roster tr th:nth-of-type(8),.rosters_trades_display #roster tr th[colspan="2"]+th+th+th+th,.rosters_trades_display #roster tr th[colspan="3"]+th+th+th+th,.rosters_trades_display #roster tr th[colspan="4"]+th+th+th+th{display:table-cell!important}}@media only screen and (max-width:450px){#roster tr td:nth-of-type(6),#roster tr th:nth-of-type(6),#roster tr th[colspan="2"]+th+th+th,#roster tr th[colspan="3"]+th+th+th,#roster tr th[colspan="4"]+th+th+th,.rosters_trades_display #roster tr td:nth-of-type(7),.rosters_trades_display #roster tr th:nth-of-type(7),.rosters_trades_display #roster tr th[colspan="2"]+th+th+th,.rosters_trades_display #roster tr th[colspan="3"]+th+th+th,.rosters_trades_display #roster tr th[colspan="4"]+th+th+th{display:table-cell!important}}@media only screen and (max-width:400px){#roster tr td:nth-of-type(5),#roster tr th:nth-of-type(5),#roster tr th[colspan="2"]+th+th,#roster tr th[colspan="3"]+th+th,#roster tr th[colspan="4"]+th+th,.rosters_trades_display #roster tr td:nth-of-type(6),.rosters_trades_display #roster tr th:nth-of-type(6),.rosters_trades_display #roster tr th[colspan="2"]+th+th,.rosters_trades_display #roster tr th[colspan="3"]+th+th,.rosters_trades_display #roster tr th[colspan="4"]+th+th{display:table-cell!important}}
+
+/* Submit Lineup */
+#body_lineup .reportnavigation:nth-child(3) {display:none;}
+#body_lineup .reportnavigation {margin-bottom:20px!important;}
+#body_lineup #lineup caption span#clear-starters,
+#body_lineup #lineup caption span#reset-starters {margin:1px!important;border: 1px solid var(--dark-bg)!important;height:36px;width:40px!important;}
+#body_lineup #lineup caption span#clear-starters {padding-left:8px;}
+#body_lineup #MFLPlayerPopupContainer caption {margin:0!important;height:40px;border:0!important;border-bottom:1px solid var(--dark-bg)!important;}
+
+/* table header row */
+#lineup .report .theader{background:#000;border-bottom:2px solid #000}
+/* bg coloring for table rows inside each table that display Select x amount of players */
+#lineup .report .toomany td{background:#fcc;} /* light shaded red when player limit exceeded */
+#lineup .report .notenough td{background:#ffc;color:#000;} /* light shaded yellow when need to add more players to that position */
+#lineup .report .rightamount td{background: var(--dark-bg);} /* grey shade when have correct value of position player in lineup */
+/* Starter and Bench tablerow background color and border color */
+#lineup #startertable tr.playerrow.eventablerow,#lineup #benchtable tr.playerrow.eventablerow{background:#000;}
+#lineup #startertable tr.playerrow.oddtablerow,#lineup #benchtable tr.playerrow.oddtablerow{background: var(--darker-bg);}
+#lineup #startertable tr.row_empty td,#lineup #benchtable tr.row_empty td{background: var(--light-accent);}
+#lineup tr.rightamount td,#lineup tr.notenough td,#lineup tr.toomany td,#lineup tr.row_empty td,
+#lineup #startertable tr.playerrow.oddtablerow td,#lineup #benchtable tr.playerrow.oddtablerow td,
+#lineup #startertable tr.playerrow.eventablerow td,#lineup #benchtable tr.playerrow.eventablerow td{border-bottom:1px solid #000;}
+/* player photo */
+#lineup #startertable tr.playerrow td.pphoto,#lineup #benchtable tr.playerrow td.pphoto{border:1px solid #ddd;background:#fff}
+/* player injury */
+#lineup #benchtable td.inj b,#lineup #startertable td.inj b{color:#fff;background:#cd2122}
+/* player proj points */
+#lineup #benchtable td.proj-pts,#lineup #startertable td.proj-pts{color:green}
+/* player matchup - player on bye text color */
+#lineup #startertable tr.playerrow td.weekly-opp b,#lineup #benchtable tr.playerrow td.weekly-opp b{color: var(--light-accent);font-family: 'Roboto',sans-serif;}
+/* x drop player icon */
+#lineup #startertable tr.playerrow:after{color:#cd2122}
+/* lock icon color for player on bye or game started */
+#lineup #benchtable tr.playerrow.disabled-row:after,#lineup #startertable tr.playerrow.disabled-row:after{color:#cd2122}
+/* + add player icon */
+#lineup #benchtable tr.playerrow:after,#lineup #benchtable tr.playerrow.original-starter:before,#lineup #startertable tr.playerrow.original-starter:before{color:green}
+/* submit lineup - use default submit form icon color */
+#lineup .form_buttons:before,#lineup .form_buttons.default-btn:after,#go-back:before{color:#fff}
+/* Add Button for Empty starter rows on mobile */
+#lineup #startertable .row_empty td:after{color:green}
+
+
+/* NO NEED TO EDIT BELOW LAYOUT STYLE */
+/* table layout */
+#lineup #startertable{float:left;width:49.9%}
+#lineup #benchtable{float:right;width:49.9%}
+#lineup .reportnavigation{clear:both}
+#lineup #startertable .oddtablerow th,#lineup #startertable .eventablerow th,#lineup #benchtable .oddtablerow th,#lineup #benchtable .eventablerow th{display:none}
+#lineup .report .playerrow:hover,#lineup .report .playerrow:hover{cursor:pointer}
+#lineup .report .postitle{text-transform:uppercase}
+#lineup #benchtable .sheader,#lineup #startertable .sheader{position:relative;width:100%;display:inline-table}
+#lineup #benchtable .sheader th,#lineup #startertable .sheader th{height:22px;line-height:22px;font-weight:400;font-size:12px}
+#lineup .report .offstartern{position:absolute;right:10px}
+#lineup #startertable tr.playerrow,#lineup #benchtable tr.playerrow{position:relative;height:56px;background:none;border:0;box-shadow:none;display:block}
+.row_empty{height:56px}
+#lineup #startertable tr.playerrow td,#lineup #benchtable tr.playerrow td{padding:0;font-size:14px;background:none;border:0;box-shadow:none}
+
+/* Hide table on submit lineup submission page when error lineup occures */
+#body_submit_lineups #submit_lineups form{display:none}
+
+/* table header row */
+#lineup .report .theader{height:30px;line-height:30px;position:relative;box-shadow:none;display:block}
+#lineup .report .theader td{padding:0;font-size:11px;font-weight:400}
+
+/* player photo */
+#lineup #startertable tr.playerrow td.pphoto,#lineup #benchtable tr.playerrow td.pphoto{border-radius:50%;width:51px;max-width:51px;height:51px;overflow:hidden;text-align:center;position:absolute;left:1px;top:2px}
+#lineup #startertable .headshot,#lineup #benchtable .headshot{height: 57px;width: 42px;margin-top: -2px;}
+#lineup #startertable tr.def_row .headshot, #lineup #benchtable tr.def_row .headshot {height:100%;margin:0;width:auto;}
+/* player name */
+#lineup #startertable tr.playerrow td.player,#lineup #benchtable tr.playerrow td.player{position:absolute;left:60px;top:2px;border:0;box-shadow:none;z-index:1}
+#lineup #benchtable tr.theader td.player,#lineup #startertable tr.theader td.player{position:absolute;left:1px;top:0;border:0;box-shadow:none}
+/* player matchup */
+#lineup #startertable tr.playerrow td.weekly-opp,#lineup #benchtable tr.playerrow td.weekly-opp{position:absolute;left:65px;top:21px;border:0;box-shadow:none;font-size:12px}
+#lineup #startertable tr.playerrow td.weekly-opp b,#lineup #benchtable tr.playerrow td.weekly-opp b{font-weight:400;font-style:italic;}
+#lineup #startertable tr.playerrow td.weekly-opp b:before,#lineup #benchtable tr.playerrow td.weekly-opp b:before{content:"Player on ";}
+#lineup #startertable tr.playerrow td.weekly-opp b:after,#lineup #benchtable tr.playerrow td.weekly-opp b:after{content:" this week !";}
+/* player injury */
+#lineup #benchtable td.inj,#lineup #startertable td.inj{position:absolute;left:40px;top:36px;border:0;box-shadow:none;}
+#lineup #benchtable td.inj b,#lineup #startertable td.inj b{font-size:10px;font-weight:400;border-radius:50%;width:16px;height:16px;line-height:16px;display:block}
+/* player proj points */
+#lineup #benchtable td.proj-pts,#lineup #startertable td.proj-pts{position:absolute;left:70px;top:37px;border:0;box-shadow:none;text-align:center;font-size:12px!important}
+#lineup #benchtable td.proj-pts:before,#lineup #startertable td.proj-pts:before{content:"Proj Pts: ";}
+/* player bye */
+#lineup #benchtable td.bye,#lineup #startertable td.bye{display:none;}
+/* player ytd points */
+#lineup #benchtable td.ytd-pts,#lineup #startertable td.ytd-pts{position:absolute;right:120px;top:18px;border:0;box-shadow:none;width:45px;text-align:center}
+#lineup #benchtable tr.theader td.ytd-pts,#lineup #startertable tr.theader td.ytd-pts{position:absolute;right:120px;top:0;border:0;box-shadow:none;width:45px;text-align:center;}
+#lineup #benchtable td.ytd-pts a,#lineup #startertable td.ytd-pts a{text-decoration:none}
+/* player avg points */
+#lineup #benchtable td.avg-pts,#lineup #startertable td.avg-pts{position:absolute;right:180px;top:18px;border:0;box-shadow:none;width:45px;text-align:center}
+#lineup #benchtable tr.theader td.avg-pts,#lineup #startertable tr.theader td.avg-pts{position:absolute;right:180px;top:0;border:0;box-shadow:none;width:45px;text-align:center;}
+/* player rush pass rank */
+#lineup #benchtable td.rush-rank,#lineup #startertable td.rush-rank{position:absolute;right:40px;top:18px;border:0;box-shadow:none;width:20px;text-align:center}
+#lineup #benchtable td.pass-rank,#lineup #startertable td.pass-rank{position:absolute;right:75px;top:18px;border:0;box-shadow:none;width:20px;text-align:center}
+#lineup #benchtable tr.theader td.rank,#lineup #startertable tr.theader td.rank{position:absolute;right:40px;top:0;border:0;box-shadow:none;width:60px;text-align:center;}
+#lineup #benchtable td.pass-rank a,#lineup #startertable td.pass-rank a,#lineup #benchtable td.rush-rank a,#lineup #startertable td.rush-rank a{text-decoration:none}
+tr.theader .opp-rank{white-space:nowrap;display:block;position:absolute;left:0;right:0;top:-8px}
+tr.theader .rush-rank{position:absolute;left:0px;top:7px}
+tr.theader .pass-rank{position:absolute;right:0px;top:7px;}
+/* player nfl news */
+#lineup #startertable tr.playerrow td.nfl-news,#lineup #benchtable tr.playerrow td.nfl-news{display:none}
+
+/* Disable pointer events */
+#lineup #startertable tr.playerrow,#lineup #benchtable tr.playerrow{pointer-events:none;z-index:0}
+/* Enable pointer events for player name - ytd points and font awesome icon */
+#lineup #startertable td.player a,#lineup #benchtable td.player a,#startertable tr.playerrow:after,#benchtable tr.playerrow:after{pointer-events:all}
+#lineup #startertable td.player a:before,#lineup #benchtable td.player a:before{content:"";position:absolute;height:100%;width:102%;z-index:-1;}
+
+/* Add sillouete image to starter empty table rows */
+#startertable tr.row_empty td{position:relative;}
+#startertable tr.row_empty td:before {content:"";position:absolute;border-radius: 50%; width: 51px;max-width: 51px;height: 51px;overflow: hidden;text-align: center;position: absolute;left: 1px;top: 2px;background:#fff url("https://www.mflscripts.com/ImageDirectory/script-images/silhouette.png")no-repeat;background-size:42px 57px;border:1px solid #ddd;border-bottom:0;background-position:50% 60%;overflow:hidden;}
+
+
+/* FONT AWESOME */
+/* Starter table x icon */
+#lineup #startertable tr.playerrow:after{content:"\f057";font-family:FontAwesome;position:absolute;top:13px;z-index:1;font-size:30px;right:5px}
+/* Bench table + icon */
+#lineup #benchtable tr.playerrow:after{content:"\f055";font-family:FontAwesome;position:absolute;top:13px;z-index:1;font-size:30px;right:5px}
+/* Starter and Bench table lock icon */
+#lineup #benchtable tr.playerrow.disabled-row:after,#lineup #startertable tr.playerrow.disabled-row:after{content:"\f023";font-family:FontAwesome;position:absolute;top:13px;z-index:1;font-size:30px;right:7px;cursor:default}
+/* Starter and Bench table checkmark icon */
+#lineup #benchtable tr.playerrow.original-starter:before,#lineup #startertable tr.playerrow.original-starter:before{content:"\f05d";font-family:FontAwesome;position:absolute;top:1px;z-index:1;font-size:16px;left:1px;cursor:default;height:12px;width:12px;background:none}
+/* Button layout to use icons */
+#lineup .form_buttons input[type="button"],#go-back.form_buttons input[type="button"]{position:relative;padding:5px 10px 5px 25px !important;font-size:16px}
+/* Submit button icon */
+#lineup .form_buttons:before{font-family:'FontAwesome';position:relative;left:26px;content:"\f00c";z-index:1;font-size:16px}
+/* Use default submission form icon */
+#lineup .form_buttons.default-btn input[type="button"]{position:relative;padding:5px 25px 5px 10px !important;font-size:16px}
+#lineup .form_buttons.default-btn:before,#lineup h3 + p.default-btn {display:none}
+#lineup .form_buttons.default-btn:after{font-family:'FontAwesome';position:relative;right:23px;content:"\f0a9";z-index:1;font-size:16px}
+/* form submission go back button */
+#go-back:before {font-family: 'FontAwesome'; position: relative;left: 23px;content: "\f0e2";z-index: 1;font-size: 16px;}
+#lineup p.form_buttons,#go-back.form_buttons{margin-left:-16px;}
+#lineup p.form_buttons.default-btn{margin-left:16px;}
+
+
+/* Lineup Responsive Styles */
+@media only screen and (max-width: 63em) {
+/* player avg points */
+#lineup #benchtable td.avg-pts,#lineup #startertable td.avg-pts,
+#lineup #benchtable tr.theader td.avg-pts,#lineup #startertable tr.theader td.avg-pts{display:none}
+}
+@media only screen and (max-width: 54em) {
+/* player ytd points */
+#lineup #benchtable td.ytd-pts,#lineup #startertable td.ytd-pts,
+#lineup #benchtable tr.theader td.ytd-pts,#lineup #startertable tr.theader td.ytd-pts{display:none}
+}
+@media only screen and (max-width: 44em) {
+.starter-hide,.bench-hide{display:none!important}
+.starter-show,.bench-show{float:inherit!important;width:100%!important}
+.mobile-link{cursor:pointer}
+.mobile-table-hide{display:none!important}
+.mobile-table-show{float:inherit!important;width:100%!important}
+#lineup #startertable .row_empty td{position:relative}
+#lineup #startertable .row_empty td:after{font-family:"FontAwesome";position:absolute;content:"\f055";font-size:30px;right: 5px;top: 50%;transform: translateY(-50%)}
+/* player ytd points */
+#lineup #benchtable td.ytd-pts,#lineup #startertable td.ytd-pts,
+#lineup #benchtable tr.theader td.ytd-pts,#lineup #startertable tr.theader td.ytd-pts{display:block;right:150px;}
+/* player avg points */
+#lineup #benchtable td.avg-pts,#lineup #startertable td.avg-pts,
+#lineup #benchtable tr.theader td.avg-pts,#lineup #startertable tr.theader td.avg-pts{display:block;right:250px;}
+}
+@media only screen and (max-width: 35em) {  
+/* player ytd points */
+#lineup #benchtable td.ytd-pts,#lineup #startertable td.ytd-pts,
+#lineup #benchtable tr.theader td.ytd-pts,#lineup #startertable tr.theader td.ytd-pts{right:120px;}
+/* player avg points */
+#lineup #benchtable td.avg-pts,#lineup #startertable td.avg-pts,
+#lineup #benchtable tr.theader td.avg-pts,#lineup #startertable tr.theader td.avg-pts{right:180px;}  
+}
+@media only screen and (max-width: 31em) {
+/* player avg points */
+#lineup #benchtable td.avg-pts,#lineup #startertable td.avg-pts,
+#lineup #benchtable tr.theader td.avg-pts,#lineup #startertable tr.theader td.avg-pts{display:none}  
+}
+@media only screen and (max-width: 26em) {
+/* player ytd points */
+#lineup #benchtable td.ytd-pts,#lineup #startertable td.ytd-pts,
+#lineup #benchtable tr.theader td.ytd-pts,#lineup #startertable tr.theader td.ytd-pts{display:none} 
+}
+@media only screen and (max-width: 20em) {
+#lineup #benchtable td.rush-rank,#lineup #startertable td.rush-rank{right:38px;}
+#lineup #benchtable td.pass-rank,#lineup #startertable td.pass-rank{right:68px;}
+#lineup #benchtable tr.theader td.rank,#lineup #startertable tr.theader td.rank{right:36px;}
+tr.theader .rush-rank{left:3px}
+tr.theader .pass-rank{right:3px;}
+}
+@media only screen and (max-width: 19.9em) {
+#lineup #benchtable td.rush-rank,#lineup #startertable td.rush-rank,#lineup #benchtable td.pass-rank,#lineup #startertable td.pass-rank{display:none}
+#lineup #benchtable tr.theader td.rank,#lineup #startertable tr.theader td.rank{display:none}
+}
+
+/* =============
+ Page: Options 05 - Trade Offers
+============== */
+#body_options_05 .removeit {display:none;}
+.report .contracttable td, .report .newposition .contracttable td {border:1px solid var(--mid-darker)!important;text-align:right;}
+.contracttable th, .contracttable td {text-align:right;padding-right:5px;color:#eee;font-size:12px;font-weight:normal;}
+.contracttable th:first-child, .contracttable td:first-child {text-align:left;padding-left:5px;}
+.report .contracttable tr:nth-child(even) th {background: var(--mid-darker)!important;}
+.traderow td {vertical-align:top;}
+.traderow .contracttable td a {white-space:nowrap;}
+.traderow .firstteam, .traderow .secondteam {vertical-align:top;text-align:center;}
+.traderow .player {text-align:left!important;}
+
+/* =============
+ Page: Options 08/top - Top Performers
+============== */
+#body_options_08 .report tr:hover td,
+.topplayerreport .report tr:hover td {background: var(--dark-bg);}
+.topplayerreport #positiontabs {white-space:nowrap;overflow:auto;padding: 0 10px;background: var(--darker-bg);}
+.topplayerreport #positiontabs span {padding: 0 15px;color:#aa0;}
+.topplayerreport #positiontabs a {display:inline-block;text-decoration:none;padding:15px;font-family: 'Graduate', cursive;
+font-size:16px;background: var(--mid-dark);border-right:1px solid var(--darker-bg);text-shadow: 1px 1px #000;}
+.topplayerreport #positiontabs a:hover {text-shadow: 0 0;background: var(--dark-bg);}
+.topplayerreport #mvpbody .report {margin-top:0;}
+.topplayerreport #mvpbody .report .weeklypointtotals {display:none;}
+.topplayerreport #mvpbody .report th {padding: 10px 2px;}
+.topplayerreport.alltopplayers #positiontabs a:nth-of-type(1),
+.topplayerreport.topqb #positiontabs a:nth-of-type(2),
+.topplayerreport.toprb #positiontabs a:nth-of-type(3),
+.topplayerreport.topwr #positiontabs a:nth-of-type(4),
+.topplayerreport.topte #positiontabs a:nth-of-type(5),
+.topplayerreport.toppk #positiontabs a:nth-of-type(6),
+.topplayerreport.topdl #positiontabs a:nth-of-type(7),
+.topplayerreport.toplb #positiontabs a:nth-of-type(8),
+.topplayerreport.topcb #positiontabs a:nth-of-type(9),
+.topplayerreport.tops #positiontabs a:nth-of-type(10),
+.topplayerreport.topfa #positiontabs a:nth-of-type(11)  {background: var(--dark-bg);}
+.topplayerreport .report .team {width:0;}
+.topplayerreport .fabannerborder {padding:1px;background: var(--mid-dark);background: linear-gradient(to top right, var(--mid-dark) 0%, var(--mid-dark) 40%, #000 55%, #000 100%);}
+.topplayerreport .fabanner {width:73px;padding-right:10px;font-size: 14px;font-family: 'Brush Script MT', cursive;font-style: italic;vertical-align: bottom;text-align:left;color: #ddd;text-shadow: 2px 1px #000;background: #00f;background: linear-gradient(to top right, #00f 0%, #00f 50%, #000 80%);cursor:default;user-select: none;}
+.topplayerreport .fabanner span {display:inline-block;position:relative;bottom:-4px;margin-right:13px;margin-top:-5px;width:30px;height:20px;background: url("https://i.ibb.co/9ZZDxsM/NFL-Logo3.png") no-repeat 0% 60%;background-size: 25px;}
+.topplayerreport .player {width:0;white-space:nowrap;}
+.topplayerreport th.player {text-align:center!important;}
+.topplayerreport .teamnamecell, .topplayerreport .teamnamecell .warning {font-size:0;}
+.topplayerreport .teamnamecell a {font-size:12px;}
+
+#newbanner {width:100%;height:22vw;max-height:286px;margin-bottom:5px;text-align:left;color: #ddd;text-shadow: 2px 1px #000;background: var(--dark-bg);background: url(https://i.ibb.co/RgSFTtm/stadium.jpg) no-repeat 50% 75%;background-size:cover;cursor:default;user-select: none;}
+#newbanner div {vertical-align:center;display:inline-block;height:22vw;max-height:286px;font-size: 2.5vw;font-family: 'Graduate', cursive;font-style: italic;}
+#newbanner #playerone {vertical-align:bottom;width:45vw;max-width:550px;height:21vw;max-height:275px;}
+#newbanner #bannerwords {vertical-align:bottom;height:10vw;width:45vw;max-width:550px;}
+#playerone {background: url(https://i.ibb.co/JBvDkLy/Brady-Tom-4.png) no-repeat center center;}
+.topqb #playerone {background: url(https://i.ibb.co/wwkvH49/Manning-Peyton-8.png) no-repeat center center;}
+.toprb #playerone {background: url(https://i.ibb.co/6mgCdrp/Sanders-Barry-4.png) no-repeat center center;}
+.topwr #playerone {background: url(https://i.ibb.co/KmP6Y2c/Rice-Jerry-5.png) no-repeat center center;}
+.topte #playerone {background: url(https://i.ibb.co/84CZLGR/Clark-Dallas.png) no-repeat center center;}
+.toppk #playerone {background: url(https://i.ibb.co/MR8N4ZH/Bryant-Matt.png) no-repeat center center;}
+.topdl #playerone {background: url(https://i.ibb.co/HBSpMZq/Cox-Fletcher.png) no-repeat center center;}
+.toplb #playerone {background: url(https://i.ibb.co/q9CMYjz/Fletcher-London.png) no-repeat center center;}
+.topcb #playerone {background: url(https://i.ibb.co/b6f0D9T/Haden-Joe.png) no-repeat center center;}
+.tops #playerone {background: url(https://i.ibb.co/7zthggG/Taylor-Sean.png) no-repeat center center;}
+.toprookies #playerone {background: url(https://i.ibb.co/9ZZDxsM/NFL-Logo3.png) no-repeat center center;}
+#newbanner #playerone {background-size: contain;}
+
+/* =============
+ Page: Options 20 - Unknown
+============== */
+#body_options_20 .report td .franchiseicon {max-width:250px;height:40px;}
+
+/* =============
+ Page - Options 44 - Unknown
+============== */
+#options_44 th:first-child {width:1px;}
+#options_44 .oddtablerow td:last-child {background:#440;}
+#options_44 .eventablerow td:last-child {background:#660;}
+#options_194 .report .rank {width:1px;}
+
+/* =============
+ Page: Options 98 - Unknown
+============== */
+#body_options_98 .report table .oddtablerow td {padding:2px;background:#000!important;}
+#body_options_98 .report table .eventablerow td {padding:2px;background: var(--darker-bg)!important;}
+
+/* =============
+ Page: Options 153 - Unknown
+============== */
+#body_options_153 .report td:first-child {width:0;}
+
+
+/* =============
+ Page: Options 257 - Drop Player
+============== */
+#options_257 .report tr:first-child td {background:#000!important;}
+#options_257 .report tr:first-child td:nth-child(2), #options_257 .report tr:first-child td:nth-child(3), #options_257 .report tr:first-child td:nth-child(4), #options_257 .report tr:first-child td:nth-child(5) {width:1px;}
+#options_257 .report tr:first-child td:nth-child(2) table td{padding-top:0;}
+#options_257 .report tr:first-child td:nth-child(6) table td{padding-top:40px;}
+#options_257 .report tr:last-child td {background:#000;}
+
+/* =============
+ Page: Message Board
+============== */
+/* Avatar image */
+img.ava {
+	width: 150px;
+	height: auto;
+}
+
+/* =============
+ Page: News Articles
+============== */
+#body_news_articles .report tr th:nth-child(5), #body_news_articles .report tr td:nth-child(5) {display:none;}
+
+/* =============
+ Page: body_ajax_ls - Scoreboard
+============== */
+#MFLFantasyMatchups {padding:3px!important;}
+
+#body_ajax_ls #ls_setting_drop, #body_ajax_ls .ls-outer-table, #body_ajax_ls #ls_ticker_tab_id, #body_ajax_ls #ls_mfl_notes {font-family: 'Roboto Condensed', sans-serif}
+#body_ajax_ls .ls-boxscore {white-space: nowrap}
+#LS_TopTableHolder .LS_MainScoreboard {border-spacing: 2px!important}
+#LS_CenterTop {position: relative;font-weight: 700;font-size: 36px}
+#LS_CenterTop span.hometeam {position: absolute;right: 1%;bottom: 1%;font-size: 11px;font-weight: normal}
+#LS_CenterTop span.awayteam {position: absolute;left: 1%;bottom: 1%;font-size: 11px;font-weight: normal}
+#LS_CenterTop .awayteam:before {content: "\f0d9";font-family: FontAwesome;padding-right: 3px;}
+#LS_CenterTop .hometeam:after {content: "\f0da";font-family: FontAwesome;padding-left: 3px;}
+#body_ajax_ls #marquee_home, #body_ajax_ls #marquee_away {display: none}
+#LS_TopTableHolder .LS_MainScoreboard td {text-align: center;vertical-align: middle}
+#LS_TopTableHolder #LS_AwayTeamName,
+#LS_TopTableHolder #LS_HomeTeamName {font-size: 12px;}
+#LS_AwayTeamName, #LS_HomeTeamName, #LS_CenterTop {width: 33.3%}
+#body_ajax_ls #other_games {table-layout: fixed}
+#body_ajax_ls div.ls_other_game {cursor: pointer;vertical-align: middle;padding: 2px 3px;min-width: 150px}
+#body_ajax_ls td.ls_og_cell {padding-left: 0;width: auto}
+#body_ajax_ls td.ls_player_stats {font-size: 0;width: 0;height: 0;padding: 0;margin: 0;border: 0 !important;position: absolute;bottom: 0}
+#body_ajax_ls td.ls_player_stats div {font-size: 10px;white-space: nowrap}
+#body_ajax_ls td div[class^="pfpts"] {cursor: pointer;font-size: 14px}
+#body_ajax_ls th.ls_player_stats,
+#body_ajax_ls tr.td-totals-row .ls_player_stats {display: none!important}
+#body_ajax_ls td a[href^="player"] {white-space: nowrap}
+#body_ajax_ls #other_games {margin: 0!important}
+#body_ajax_ls #marquee_away .ls_changed,
+#body_ajax_ls #marquee_home .ls_changed {background: none;color: inherit}
+#body_ajax_ls #roster_away td,
+#body_ajax_ls #roster_home td {padding-bottom: 16px}
+#body_ajax_ls #roster_away td.td-pad,
+#body_ajax_ls #roster_home td.td-pad {padding-bottom: 0}
+#body_ajax_ls tr.td-totals-row td {border-bottom: 0;padding-bottom: 0!important;line-height: 30px;font-size: 14px}
+#body_ajax_ls #last_update.ls_changed {background: none}
+#body_ajax_ls #roster_away th,
+#body_ajax_ls #roster_home th {text-align: center}
+#body_ajax_ls #roster_away th:first-of-type,
+#body_ajax_ls #roster_home th:first-of-type {text-align: left;text-indent: 2px}
+#body_ajax_ls td.td-first-type {position: relative}
+#body_ajax_ls #roster_away .ls_starters td,
+#body_ajax_ls #roster_home .ls_starters td,
+#body_ajax_ls #roster_away .ls_nonstarters td,
+#body_ajax_ls #roster_home .ls_nonstarters td {text-align: center;}
+#body_ajax_ls #roster_away .ls_starters td:first-of-type,
+#body_ajax_ls #roster_home .ls_starters td:first-of-type,
+#body_ajax_ls #roster_away .ls_nonstarters td:first-of-type,
+#body_ajax_ls #roster_home .ls_nonstarters td:first-of-type {text-align: left;}
+#body_ajax_ls .ls-matchup td.td-first-type {width: 190px}
+#body_ajax_ls .ls-matchup td.ls_game_info,
+#body_ajax_ls th.ls_game_info {width: 105px;min-width: 105px}
+#body_ajax_ls .ls-matchup td.ls_projections {font-size: 90%;}
+#body_ajax_ls .mobile-view {padding-right: 5px}
+#body_ajax_ls .mobile-view:last-child {padding: 0;padding-left: 3px}
+#body_ajax_ls table#roster_away,
+#body_ajax_ls table#roster_home {margin: 0}
+#body_ajax_ls #ls_setting_drop input {display: none}
+#body_ajax_ls #ls_setting_drop input+label:before {font-family: FontAwesome;display: inline-block;content: "\f046";position: absolute;left: 0;top: 50%;transform: translateY(-50%);}
+#body_ajax_ls #ls_setting_drop input:checked+label:before {content: "\f096"}
+#body_ajax_ls #ls_setting_drop {text-align: left}
+#body_ajax_ls #ls_setting_drop label {padding-left: 15px;font-size: 13px;margin-right: 10px;}
+#body_ajax_ls #ls_setting_drop a {text-decoration: none;font-size: 16px;}
+#body_ajax_ls .ls_append_input label {cursor:pointer;}
+#body_ajax_ls #ls_setting_drop .hide_bench {position: relative;display: inline-block;height: 30px;vertical-align: middle;line-height: 30px;}
+#body_ajax_ls #ls_mfl_notes {text-align: center}
+#body_ajax_ls div.ls_og_selected,
+#body_ajax_ls div#ls_ticker_label {font-weight: normal}
+#ls_ticker_tab_id {line-height: 30px}
+#body_ajax_ls .ls_game_info div a {text-decoration: none}
+#body_ajax_ls table .ls_changed,
+#body_ajax_ls table div.ls_changed,
+#body_ajax_ls table .ls_changed a {background: none;color: inherit;border: none}
+#body_ajax_ls table div.ls_withposs {border: 0}
+#body_ajax_ls table div.ls_noposs {border: 0}
+#body_ajax_ls table div.ls_noposs.ls_changed,
+div.ls_withposs.ls_changed, #body_ajax_ls div.ls_redzone {color: inherit;border: 0;}
+#body_ajax_ls table td.ls_game_info div, #body_ajax_ls table td.td-first-type {font-size: 10px;font-style: italic}
+#body_ajax_ls table td.ls_game_info div a, #body_ajax_ls table td.td-first-type a {font-size: 13px;font-style: normal}
+#body_ajax_ls table td.ls_player_stats div {font-style: normal}
+#body_ajax_ls #ls_ticker_tab_id[style*="display: inline;"]+div, #body_ajax_ls #ls_ticker_tab_id+div {margin-top: 10px}
+#body_ajax_ls #ls_ticker_tab_id[style*="display: none;"]+div {margin-top: 0}
+#body_ajax_ls .ls_other_game td.ls_projections {font-size: 80%;width: 26px;padding: 0}
+.ls_pace_box {text-align: center}
+.ls_projections {font-style: italic;cursor: default;}
+th.ls_projections {font-style: normal}
+#body_ajax_ls td div[class^="oggstat"] {opacity: 0;width: 4px;font-size: 0;}
+#body_ajax_ls td div[class^="oggstat"] i {font-size: 13px}
+#other_games td[style="border:none;"]:last-of-type {padding: 0}
+#body_ajax_ls .ls_box_gameover td.winner_mark div[class^="oggstat"] {opacity: 1;}
+
+/* SCORING NUMBERS FORMAT */
+#LS_AwayScore, #LS_HomeScore {font-size: 30px;padding: 0}
+#LS_AwayScore span.blank a, #LS_HomeScore span.blank a {padding: 4px;}
+#LS_AwayScore span, #LS_HomeScore span {border-width: 1px;border-style: solid;text-align: center;position: relative;width: 1%;display: table-cell;font-weight: 600;font-size: 40px;text-decoration: none;min-width: 30px;line-height: normal;cursor: default;border-width: 1px;border-style: solid}
+#LS_AwayScore span:before, #LS_HomeScore span:before {content: "";display: block;position: absolute;height: 3px;width: 100%;top: 50%;transform: translateY(-50%);left: 0;}
+#LS_AwayScore span:after, #LS_HomeScore span:after {content: "";display: block;position: absolute;height: 1px;width: 100%;top: 50%;transform: translateY(-50%);left: 0;margin-top: 0px;}
+#LS_AwayScore span a:after, #LS_HomeScore span a:after {content: "";display: block;position: absolute;height: 9px;width: 3px;top: 50%;transform: translateY(-50%);left: 0;z-index: 1}
+#LS_AwayScore span a:before, #LS_HomeScore span a:before {content: "";display: block;position: absolute;height: 9px;width: 3px;top: 50%;transform: translateY(-50%);right: 0; z-index: 1}
+.MFLMainScoreboard, #LS_AwayScore span a:after, #LS_HomeScore span a:after, #LS_AwayScore span a:before, #LS_HomeScore span a:before {border-width: 1px;  border-style: solid;}
+#LS_AwayScore div, #LS_HomeScore div {border-spacing: 1px;width: 100%}
+div.ls_team_points {padding: 0!important}
+@media only screen and (max-width:42.000em) {#LS_AwayScore span.ls_num_1, #LS_HomeScore span.ls_num_1 {display: none}}
+@media only screen and (max-width:32.000em) {#LS_AwayScore span.ls_num_2, #LS_HomeScore span.ls_num_2 {display: none}}
+@media only screen and (max-width:28.000em) {#LS_AwayScore span, #LS_HomeScore span {font-size: 24px;min-width: 20px}}
+
+/* MOBILE MFL SCORING FORMAT */
+@media only screen and (max-width:54.25em) {
+#LS_TopTableHolder #LS_CenterTop, #LS_TopTableHolder .prmin, #LS_TopTableHolder .LS_ScoreboardTitle {display: none}
+#LS_AwayTeamName, #LS_HomeTeamName {width: 50%}
+}
+@media only screen and (min-width:48.1em) {
+#body_ajax_ls .ls-outer-table {table-layout: fixed}
+#body_ajax_ls #roster_away caption, #roster_home caption {display: none}
+}
+@media only screen and (max-width:410px) {td.ls_projections, th.ls_projections, #ls_pace_wrapper {display: none!important}}
+
+
+/* MFL SCORING COLOR CHANGES */
+
+/*BOXSCORES TABLE*/
+
+/*text color for points in box score table*/
+#body_ajax_ls td div[class^="ogffpts"] {color: #fff}
+
+/*main scoreboard header coloring*/
+
+/*color text for P-PMR-PYT*/
+#LS_TopTableHolder td.prmin {color: var(--light-accent);width: 5.55%}
+
+/*border and bg around td cells*/
+#LS_TopTableHolder .LS_MainScoreboard td {border: 1px solid rgba(45, 45, 45, .7);background: rgba(45, 45, 45, .4);}
+#LS_TopTableHolder td.LS_ScoreboardTitle, #LS_TopTableHolder #LS_AwayScore, #LS_TopTableHolder #LS_HomeScore {background: rgba(0, 0, 0, .1);}
+
+/*MAIN TABLES FOR TEAM VS TEAM PLAYERS MATCHUPS*/
+
+/*text color for stats of each player*/
+#body_ajax_ls td.ls_player_stats div {color: var(--light-accent);}
+
+/*text color for player total points*/
+#body_ajax_ls td div[class^="pfpts"] {color: #fff}
+
+/*add border to bottom of all td cells if desired*/
+#body_ajax_ls tr.ls_nonstarters td, #body_ajax_ls tr.ls_starters td {border-bottom: 1px solid var(--darker-bg)}
+
+/*background and text color for starting and bench total points rows*/
+#body_ajax_ls tr.td-totals-row td {background: var(--darker-bg);color: #e63143}
+
+/*NFL ICONS FOR H2H GAMES AND FRANCHISE ICONS IN BOXSCORE*/
+
+/*icon height for franchise logos in boxscore table*/
+#body_ajax_ls img.ls_og_icon {max-width: 106px;max-height: 20px}
+
+/*icon height for NFL logos in table*/
+#body_ajax_ls img.ls_nfl_icon {margin: 0 2px;max-width: 20px;max-height: 15px}
+
+/*SETTINGS CHECKBOXES*/
+
+/*settings checkbox color when not checked*/
+#body_ajax_ls #ls_setting_drop input+label:before {color: lime}
+
+/*settings checkbox color when checked*/
+#body_ajax_ls #ls_setting_drop input:checked+label:before {color: #e63143}
+
+/*color when live scoring ticker data is updated every 40 seconds*/
+#body_ajax_ls #last_update.ls_changed {color: lime}
+
+/*add football to players who have and dont have balls*/
+#body_ajax_ls .ls_players_table tr.ls_has_ball .td-first-type:after, #body_ajax_ls .ls_players_table tr.ls_nothas_ball .td-first-type:after, #body_ajax_ls .ls_players_table tr.ls_in_redzone .td-first-type:after {content: '';background-image: url('https://www.mflscripts.com/ImageDirectory/script-images/football.svg');background-size: 12px 12px;height: 12px;width: 12px;position: absolute;margin-left: 5px;margin-top: 1px}
+#body_ajax_ls .ls_players_table tr.ls_nothas_ball .td-first-type:after {opacity: .3}
+#body_ajax_ls .ls_players_table tr.ls_in_redzone .td-first-type:after {background-image: url('https://www.mflscripts.com/ImageDirectory/script-images/goal-post.svg')}
+
+/*boxscore color for F Final game mark and winner mark caret*/
+#body_ajax_ls #nfl_games span.ls_nfl_box_over {color: #e63143}
+#body_ajax_ls .ls_box_gameover div[class^="oggstat"], #body_ajax_ls #nfl_games span.ls_nfl_box_inprog, #body_ajax_ls .nflggstat {color: lime}
+
+/*color of "Final" text in NFL Boxscores table*/
+#body_ajax_ls #nfl_games span.ls_nfl_box_over {color: #e63143}
+
+/*when MFL makes updates to scoreboard - change text color*/
+#LS_TopTableHolder #LS_AwayScore .ls_changed, #LS_TopTableHolder #LS_HomeScore .ls_changed, #body_ajax_ls tr.ls_gameinprogress td div[class^="pfpts"].ls_changed, #body_ajax_ls div[id^="fspts"].ls_changed, #body_ajax_ls td.prmin div.ls_changed, #body_ajax_ls td div[class^="ogffpts"].ls_changed {color: lime}
+
+/*Pace text color in scoreboard and td cell*/
+#body_ajax_ls tr.td-totals-row td.ffpts_pace_total {color: var(--light-accent);font-size: 90%;font-weight: bold}
+.ls_above_projected {color:#90ee90!important}
+.ls_below_projected {color:#f08080!important}
+.ls_at_projected {color:#fff!important}
+.ls_projected {color: var(--light-accent)!important}
+
+/* Scoring Numbers Coloring */
+#LS_AwayScore span, #LS_HomeScore span {border-color: rgba(45, 45, 45, .9);background: rgba(0, 0, 0, .2);}
+#LS_AwayScore span a, #LS_HomeScore span a {color: #e63143}
+#LS_AwayScore span:before, #LS_HomeScore span:before {background: rgba(45, 45, 45, .5);}
+#LS_AwayScore span:after, #LS_HomeScore span:after {background: rgba(0, 0, 0, .6);}
+#LS_AwayScore span a::after, #LS_HomeScore span a::after, #LS_AwayScore span a::before, #LS_HomeScore span a::before {border-color: rgba(45, 45, 45, .7);background: rgba(0, 0, 0, .4)}
+
+/*   COLOR NFL BOX SCORE POPUP    */
+.ls-modal {background: rgba(0, 0, 0, .7)}
+.ls-modal-content {background-color: var(--darker-bg);background-image: url(https://www.mflscripts.com/ImageDirectory/script-images/body-bg.jpg);box-shadow: 0 0 25px rgba(0, 0, 0, 1)}
+.ls-modal-header {color: #da3636}
+.ls-modal-header .close {background: var(--dark-bg);border-color: var(--dark-bg);color: #fff}
+.ls-modal-header .close:hover, .ls-modal-header .close:focus {background: #da3636;border-color: #da3636;color: #fff}
+.ls-modal-body {color: #eee}
+#ls-modal-content .ls-popup-position-li {background: var(--darker-bg);color: #da3636;color: #fff}
+#ls-modal-content .ls-popup-player-li {border-bottom: 2px solid rgba(218, 54, 54, .3)}
+#ls-modal-content .ls-popup-stats {color: var(--light-accent);}
+#ls-modal-content span.ls-popup-points {color: lime}
+.ls-explain-points-name {color: #fff;}
+.ls-explain-points-total {color: lime;}
+.ls-explain-points-total::before {color:#fff}
+.ls-explain-points-li::before {color:#da3636}
+.ls-popup-status-ns::before, .ls-popup-status-s::before, .ls-popup-status-ts::before, .ls-popup-status-ir::before {content: "-";color:#eee;font-style:normal;padding-right:1px}
+.ls-popup-status-ns, .ls-popup-status-s, .ls-popup-status-ts, .ls-popup-status-ir {font-style:italic;padding-left:2px}
+.ls-popup-status-ns {color:#da3636}
+.ls-popup-status-s {color:lime}
+.ls-popup-status-ts {color:orange}
+.ls-popup-status-ir {color:red}
+
+/* WEEKLY NAV MENUS */
+#body_ajax_ls .weekly-navbar {font-family: 'Roboto Condensed', sans-serif;margin: 10px 0;margin-top: 0;height: 30px;line-height: 30px;display: inline-table;text-align: center;width: 100%;font-size: 0}
+#body_ajax_ls .weekly-navbar .reportnavigationheader {color: #fff;vertical-align: middle;font-size: 14px;text-transform: uppercase;font-weight: normal}
+#body_ajax_ls .weekly-navbar a, #body_ajax_ls .weekly-navbar a:link, #body_ajax_ls .weekly-navbar a:active, #body_ajax_ls .weekly-navbar a:visited, #body_ajax_ls .weekly-navbar .currentweek {color: #fff;background: rgba(45, 45, 45, .4);border: 1px solid rgba(45, 45, 45, .7);border-radius: 2px;text-decoration: none;display: inline-block;min-width: 24px;padding: 0 5px;text-align: center;vertical-align: middle;font-size: 12px;margin: 0 3px;box-shadow: 0 0 5px rgba(0, 0, 0, .5);}
+#body_ajax_ls .weekly-navbar a:hover, #body_ajax_ls .weekly-navbar a:link:hover, #body_ajax_ls .weekly-navbar a:active:hover, #body_ajax_ls .weekly-navbar a:visited:hover {color: #fff;background: rgba(218, 54, 54, .2)}
+#body_ajax_ls .weekly-navbar #body_ajax_ls .currentweek {background: rgba(218, 54, 54, .2);color: #fff}
+#body_ajax_ls .weekly-navbar-mobile {display: none;margin: 10px 0;margin-top: 0;height: 30px;line-height: 30px;text-align: center;width: 100%}
+#body_ajax_ls #hsubmenu .weekly-navbar-mobile {margin: 0}
+#body_ajax_ls .weekly-navbar .inactive {background: rgba(45, 45, 45, .2)!important;color: var(--mid-darker)!important;border: 1px solid rgba(45, 45, 45, .4)}
+@media only screen and (max-width:48.000em) {
+#body_ajax_ls .weekly-navbar {display: none}
+#body_ajax_ls .weekly-navbar-mobile {display: inline-table}
+#body_site_news .weekly-navbar {display: inline-block}
+#body_site_news .weekly-navbar-mobile {display: none}
+}
+@media only screen and (min-width: 48.1em){
+#body_ajax_ls .mobile-view {width: auto!important;float: none;}
+}
+@media only screen and (max-width: 48em){
+#body_ajax_ls .mobile-view {width: 100%;float: left;margin-top: 0;padding: 0!important;}
+}
+
+/* MVP Style */
+
+/* settings drop down */
+#body_ajax_ls #ls_setting_drop {position:fixed;top:0;left:0;z-index:99;width:100%;text-align:center;background: var(--darker-bg);border-bottom:2px solid var(--dark-bg);box-shadow: 0 0 10px #000;}
+#body_ajax_ls .ls_toggle_settings {display:none!important;padding:10px;}
+#body_ajax_ls .ls_append_input {display:block!important;}
+#body_ajax_ls .ls-nfl-boxscore {margin:0!important;padding:0!important;}
+#body_ajax_ls .ls_scroller {padding-top:3px!important;}
+#body_ajax_ls .ls-nfl-boxscore {border-radius:0!important;border-top:2px solid var(--dark-bg)!important;}
+
+/*box score matchups bg color*/
+#body_ajax_ls div.ls_other_game .ls_og_cell {padding:3px;padding-top:1px;}
+#body_ajax_ls div.ls_other_game {background: rgba(200, 0, 0, .3);border-color: rgba(45, 45, 45, .7)}
+#body_ajax_ls div.ls_other_game:hover {background: rgba(0, 200, 0, .3)}
+#body_ajax_ls div.ls_other_game.current_matchup {background-color: rgba(200, 200, 20, .5)}
+
+/* matchup table */
+#body_ajax_ls .ls-matchup .td-first-type {padding-left:5px!important;}
+#body_ajax_ls .ls-matchup td.ls_projected, #body_ajax_ls .ls-matchup td:last-child {padding-right:10px;}
+#body_ajax_ls .ls-matchup td:last-child div {text-align:right;text-shadow: 1px 1px #000;}
+#body_ajax_ls .ls-matchup td:last-child div:hover {text-shadow: 0 0 #000;}
+
+/* newpostion colors and making tables even */
+#body_ajax_ls .ls-matchup td {height:60px;}
+#body_ajax_ls .ls-matchup td.ls_player_stats {height:0;}
+#body_ajax_ls .newposition td {border-top:1px solid var(--light-accent)!important;} 
+#body_ajax_ls .oddtablerow td {border-top:1px solid #000;}
+#body_ajax_ls .eventablerow td {border-top:1px solid var(--darker-bg);}
+#body_ajax_ls td.ls_player_stats {border-top:0!important;}
+#body_ajax_ls .report td .warning {font-size:10px;}
+#body_ajax_ls .report .ls-matchup td img {height:12px;}
+
+/* bg color for games ended and in progress */
+#body_ajax_ls tr.ls_gameis_over td.td-first-type {background-color: #500;background: linear-gradient(to left, transparent 0%, transparent 50%, #500 100%);}
+#body_ajax_ls tr.ls_gameis_over td.ls_projections {background-color: #500;background: linear-gradient(to right, transparent 0%, #500 70%, #500 100%);}
+#body_ajax_ls tr.ls_gameis_over > td:last-of-type {background-color: #500;}
+#body_ajax_ls tr.ls_gameis_over td.ls_game_info {background: transparent;}
+#body_ajax_ls tr.ls_gameis_over td.ls_player_stats {background: transparent;}
+
+#body_ajax_ls tr.ls_gameinprogress td.td-first-type  {background: linear-gradient(to left, transparent 0%, transparent 50%, #770 100%);}
+#body_ajax_ls tr.ls_gameinprogress td.ls_projections {background-color: #770;background: linear-gradient(to right, transparent 0%, #770 70%, #770 100%);}
+#body_ajax_ls tr.ls_gameinprogress > td:last-child {background-color: #770;}
+#body_ajax_ls tr.ls_gameinprogress td.ls_game_info {background: transparent;}
+#body_ajax_ls tr.ls_gameinprogress td.ls_player_stats {background: transparent;}
+
+#body_ajax_ls td.ls_game_info td {height:0!important;}
+#body_ajax_ls td.ls_game_info table td {background:transparent!important;}
+
+/* bottom ticker */
+#body_ajax_ls #ls_ticker_tab_id {/*position:fixed;z-index:9;left:0;bottom:0px;*/height:44px;margin:0;background:transparent!important;border-radius:0;padding:0;}
+#body_ajax_ls #ls_ticker_tab_id td:first-of-type {background: #e63143;color: #fff}
+#body_ajax_ls #ls_ticker_tab_id td:last-of-type {background: var(--light-accent);color: #000}
+#body_ajax_ls #ls_ticker_tab_id td:first-of-type {border: 1px solid var(--darker-bg);}
+#body_ajax_ls #ls_ticker_tab_id td:last-of-type {border: 1px solid var(--darker-bg);border-left: 0}
+#body_ajax_ls #minichat2_wrapper{z-index:8;}
+
