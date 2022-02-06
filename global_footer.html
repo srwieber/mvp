@@ -1,0 +1,629 @@
+</div> <!--  id="withmenus opened in unknown -->
+</div> <!--  id="contentframe opened in unknown -->
+<module name="MONTHLY_CALENDAR"/>
+</div> <!--  id="mvpbody" opened in header -->
+
+
+<style>
+</style>
+
+
+<script>
+
+$(document).on('click', '#menutoggle', function (index) {
+	$(this).find('i').toggleClass('fa-toggle-on fa-toggle-off');
+	$('.myfantasyleague_menu').toggle();
+});
+
+//=====	Custom Menu =========================
+$(document).mouseup(function(e) {
+    var container = $("#usericon #welcome");
+    var containerTwo = $("#iricon #ir_violations");
+    var containerThree = $("#invlu_icon #InvalidLineup");
+//    if (!container.is(e.target) && container.has(e.target).length === 0) {
+    if (!container.is(e.target)) {
+        container.hide();
+    }
+    if (!containerTwo.is(e.target)) {
+        containerTwo.hide();
+    }
+    if (!containerThree.is(e.target)) {
+        containerThree.hide();
+    }
+});
+
+//===== Codes for active weeks =========================
+
+if (completedWeek < endWeek) {
+
+//===== Menu: Invalid Lineup icon =========================
+	//LINEUPS ALERT VERSION NUMBER
+	console.log('LINEUPS ALERT SCRIPT LAST UPDATED 09-24-21');
+
+	//CACHED HEADER INCLUDES FUNCTIONS FOR FIVE MINUTE CACHE, DAILY CACHE AND INDEXEDDB CACHING
+	if(typeof cachedHeaderInstalled === "undefined") {
+		jQuery("head").append('<scr'+'ipt type="text/javascript" src="//www.mflscripts.com/mfl-apps/global/cache.js?v='+(parseInt( (currentServerTime+(60*60*15)) / (60*60*24) ) * 60*60*24)+'"></scr'+'ipt>');
+		var cachedHeaderInstalled = true;
+	}
+
+	var getPlayerStatus = function () {
+	var Status = "tr.starters-row td.player";
+	if (donotcountI) {
+		Status = Status + ":not(':has(.warning:contains(I))')";
+	}
+	if (donotcountS) {
+		Status = Status + ":not(':has(.warning:contains(S))')";
+	}
+	if (donotcountO) {
+		Status = Status + ":not(':has(.warning:contains(O))')";
+	}
+	if (donotcountBye) {
+		Status = Status + "+td:not(:contains(Bye))";
+	}
+	return Status;
+	}
+	var RequiredStarters = 0;
+	var clazz = {};
+	function triggerLineupAlert(){
+		triggerLineupAlert_ran = true;
+		RequiredStarters = reportLeague_ar.league.starters.count;
+		$.get(baseURLDynamic + "/" + year + "/options?L=" + league_id + "&O=06&WEEK=" + (completedWeek + 1), function (data) {
+			$(data).find('td.two_column_layout .report').each(function (index, element) {
+				$(this).find("tr:first-child").addClass('start-td');
+				$(this).find("tr:contains(Non-Starters)").prev('tr').addClass('stop-td');
+				$(this).find("tr.start-td").nextUntil('td.two_column_layout table tr.stop-td').addBack().addClass('starters-row');
+				if ($(this).find(getPlayerStatus()).length !== +RequiredStarters && $(this).attr("id") !== "InvalidLineup") {
+					var target = $("#InvalidLineup").find("tr.valid-teams");
+					$(this).find("span a").each(function () {
+						var className = this.className;
+						if (clazz[className]) {
+							return
+						}
+						clazz[className] = true;
+						$("<tr class='oddtablerow'><td colspan='2' style='text-align:center'>" + $(this)[0].outerHTML + "</td></tr>").insertAfter(target);
+						$('#InvalidLineup .reportfooter').show();
+					});
+				}
+			});
+			var $lineuprow = $("#InvalidLineup tr");
+			var invluCount = $lineuprow.length - 3;
+			if ($lineuprow.length > 3) {
+				$('.invalid-teams').show();
+				$("#invlu_icon .newnotification").html(invluCount);
+				$('#invlu_icon').fadeIn();
+				if ($('#InvalidLineup a').hasClass('myfranchise')) {
+					$('#mvpmenu #myteamli > a').css("color", "red");
+					$('#myteamsubmenu dd:nth-child(1) a .newnotification').show();
+					$('#invlu_icon .newnotification').css({"background-color": "#c00", "color": "white"});
+					$('#invlu_icon .report .reportfooter input').show();
+				}
+			}
+		});
+	}
+	function lineupAlertListenerCheck(){
+		triggerLineupAlert_count++;
+		if(typeof reportDailyFullyLoaded !== "undefined") {
+			if(reportDailyFullyLoaded) {
+				clearInterval(lineupAlertListener);
+				if(!triggerLineupAlert_ran) triggerLineupAlert();
+			}
+		}
+		if(triggerLineupAlert_count>50) {
+			clearInterval(lineupAlertListener);
+			console.log("Stop trying Lineup Alert after 5 seconds");
+		}
+	}
+	if(triggerLineupAlert_ran === undefined) var triggerLineupAlert_ran = false;
+	if(triggerLineupAlert_count === undefined) var triggerLineupAlert_count = 0;
+	if(lineupAlertListener === undefined) var lineupAlertListener = setInterval("lineupAlertListenerCheck()",100);
+
+	$('#invlu_icon').click(function(){
+		$('#InvalidLineup').toggle();
+	});
+
+
+//===== Menu: IR icon =========================
+	jQuery.get('https://%HOST%/%YEAR%/options?L=%LEAGUEID%&O=07&DISPLAY=LEAGUE', function (data) {
+		$(data).find('td.two_column_layout').has('td:contains(Possible IR Rule Violation)').each(function (index, element) {
+			$(this).find("span a").each(function () {
+			$("<tr class='oddtablerow'><td align='center'>" + $(this)[0].outerHTML + "</td></tr>" ).insertBefore("#ir_violations .reportfooter");
+			});
+		});
+		var $IRrow = $("#ir_violations tr");
+		var irCount = $IRrow.length - 2;
+		if ($IRrow.length > 2) {
+			$("#iricon").fadeIn();
+			$("#iricon .newnotification").html(irCount);
+			if ($('#ir_violations a').hasClass('myfranchise')) {
+				$('#mvpmenu #myteamli > a').css("color", "red");
+				$('#myteamsubmenu dd:nth-child(5) a .newnotification').show();
+				$('#iricon .report .reportfooter input').show();
+				$('#iricon .newnotification').css({"background-color": "#c00", "color": "white"});
+			}
+		}
+	});
+	$('#iricon').click(function(){
+		$('#ir_violations').toggle();
+	});
+
+
+//===== Menu: Trade icon =========================
+	var numberOfOffers = leagueAttributes['PendingTradesFromMe'] + leagueAttributes['PendingTradesToMe'];
+
+	if (leagueAttributes['PendingTradesToMe'] > 0) {
+		$('#mvpmenu #myteamli > a').css("color", "red");
+		$('#menutrades').html('<a style="color:#0a0;background:#444" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=05">You have a trade offer!</a><span id="numberofoffers" class="newnotification">'+numberOfOffers+'</span>');
+		$('#myteamsubmenu dd:nth-child(3) a .newnotification').html(numberOfOffers).show();
+	}else if (leagueAttributes['PendingTradesToMe'] == 0 && leagueAttributes['PendingTradesFromMe'] > 0) {
+		$('#menutrades').html('<a style="color:#dac684;background:#444" href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=05">Send another offer</a><span id="numberofoffers" class="newnotification">'+numberOfOffers+'</span>');
+		$('#myteamsubmenu dd:nth-child(3) a .newnotification').html(numberOfOffers).show();
+	}else {
+		$('#menutrades').html('<a href="//%HOST%/%YEAR%/options?L=%LEAGUEID%&O=05">Start a trade</a>');
+	}
+
+
+//===== end active weeks =========================
+}
+
+//=====	transactions =========================
+if ( $('#options_03 #contentframe').length || $('#transactions').length ) {
+	$('#options_03 #contentframe .report tr, #transactions tr').each(function () {
+		$(this).find('ul').addClass('fa-ul');
+		$(this).find('li:contains(Acquired)').prepend('<i class="fa-li fa fa-plus" aria-hidden="true"></i>');
+		$(this).find('li:contains(Dropped)').prepend('<i class="fa-li fa fa-minus" aria-hidden="true"></i>');
+		$(this).find('li:contains(Activated)').prepend('<i class="fa-li fa fa-chevron-up" aria-hidden="true"></i>');
+		$(this).find('li:contains(Deactivated)').prepend('<i class="fa-li fa fa-chevron-down" aria-hidden="true"></i>');
+		$(this).find('li:contains(Promoted)').prepend('<i class="fa-li fa fa-hand-o-up" aria-hidden="true"></i>');
+		$(this).find('li:contains(Demoted)').prepend('<i class="fa-li fa fa-hand-o-down" aria-hidden="true"></i>');
+	});
+	$('#options_03 #contentframe .report tr li:contains(";"), #transactions tr li:contains(";")').each(function(){
+		$(this).html( $(this).html().split(";").join("<br />") );
+		$(this).find('a:first-of-type').before(':<br />');
+		$(this).find('a').css('margin-left','10px');
+	});
+}
+
+
+
+//===== doc ready =========================
+$(document).ready(function(){
+
+//=====	Under Construction Warning =========================
+var pageUnderConstruction = false;
+if (pageUnderConstruction) {
+  if (franchise_id == 0000  || franchise_id == 0009) {
+    $('.pageheader').css({'display':'block','height':'0'});
+    $('.pageheader .welcome').css({'display':'block','position':'absolute','top':'90px','height':'0','padding':'0'});
+  }else {} 
+  $('#body_options_05 #mvpbody .report').before('<h1 style="color:#ff0;">This page is under construction. It may not work properly.</h1>');
+}
+
+//=====	options_142 - Cap Hits =========================
+if (thisProgram == "options_142") {
+	let nextyear = year + 1;
+	$('#contentframe .report th:nth-of-type(2)').after('<th>' + nextyear + ' Hit</th>');
+	$('#contentframe .report td:nth-of-type(2)').after('<td style="text-align:right;"></td>');
+	$('#contentframe .report tr').each(function () {
+		let contract = $(this).find('td:nth-of-type(4)').text().slice(0, -1).split('Years: ')[1];
+		let salary = $(this).find('td:nth-of-type(4)').text().split('Salary: $').join(',').split(',')[2];
+		let caphit = 0;
+		if (contract > 1) {
+			caphit += ( ( parseInt(contract) - 1 ) * parseInt(salary) ) / 4;
+			caphit = caphit.toFixed(2);
+		}
+		if (caphit > 0) {
+			$(this).find('td:nth-of-type(3)').append('$' + caphit);
+		}
+	});
+	$('#contentframe .report tr').has('td:contains(Total)').addClass('totalrow');
+	let caphitsum = 0;
+	$('#contentframe .report tr').find('td:nth-of-type(3)').each(function () {
+		var val = $.trim($(this).text());
+		if (val) {
+			val = parseFloat(val.replace(/^\$/, ""));
+			caphitsum += !isNaN(val) ? val : 0;
+		}
+	});
+	caphitsum = caphitsum.toFixed(2);
+	$('#contentframe .report .totalrow td:nth-of-type(3)').html('$' + caphitsum);
+}
+
+//=====	board_show - Message board =========================
+//if ($('#board_show').length) {
+if (thisProgram == "board_show") {
+
+function getRecord() {
+	url = baseURLDynamic + "/" + year + "/options?L=" + league_id + "&O=208&PRINTER=1";
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "html",
+		async: false,
+		success: function (data) {
+			record = $(data).find('.report');
+			$(record).prependTo('#hiddenreports').addClass('career_records');
+			boardLayout();
+		}
+	});
+}
+getRecord();
+
+function boardLayout() {
+	let mbsig = '<table id="sig"><tr><td class="signame" colspan="3"></td></tr><tr><td class="record">n/a</td><td class="est">Est. </td><td></td></tr></table>';
+	$('#contentframe .posts .eventablerow .message').append(mbsig);
+
+	$('#hiddenreports .career_records tr').each(function(index){
+			let team = $(this).find('.franchisename a').attr('class');
+			$(this).addClass(team);
+	});
+
+	$('#contentframe .posts .oddtablerow').each(function(index){
+		let teamname = $(this).find('.poster a').text();
+		$(this).next('tr').find('.signame').html(teamname);
+
+		$(this).find('.poster a').each(function(index){
+			let teamnumber = $(this).attr('href');
+			teamnumber = teamnumber.replace('&O=01', '');
+			teamnumber = teamnumber.replace('/' + year + '/options?L=' + league_id + '&F=', 'franchise_');
+			$(this).closest('tr').next('tr').addClass(teamnumber);
+		});
+	});
+
+	$('#contentframe .posts .eventablerow').each(function(index){
+		let teamicon = $(this).find('.poster .ava');
+		$(this).prev('tr').find('.poster a').html(teamicon);
+	});
+
+	for (let i = 1; i < 13; ++i) {
+		if (i < 10) {
+			let wins = $('#hiddenreports .career_records tr.franchise_000' + i).find('td:nth-of-type(3)').text();
+			let loss = $('#hiddenreports .career_records tr.franchise_000' + i).find('td:nth-of-type(4)').text();
+			let est = $('#hiddenreports .career_records tr.franchise_000' + i).find('td:nth-of-type(11) a:last-of-type').text();
+			$('#contentframe .posts tr.franchise_000' + i + ' .record').html(wins + ' - ' + loss);
+			$('#contentframe .posts tr.franchise_000' + i + ' .est').append(est);
+		}else {
+			let wins = $('#hiddenreports .career_records tr.franchise_00' + i).find('td:nth-of-type(3)').text();
+			let loss = $('#hiddenreports .career_records tr.franchise_00' + i).find('td:nth-of-type(4)').text();
+			let est = $('#hiddenreports .career_records tr.franchise_00' + i).find('td:nth-of-type(11) a:last-of-type').text();
+			$('#contentframe .posts tr.franchise_00' + i + ' .record').html(wins + ' - ' + loss);
+			$('#contentframe .posts tr.franchise_00' + i + ' .est').append(est);
+		}
+	}
+
+	$('#contentframe .posts tr.franchise_0000 #sig tr:last-of-type').remove();
+
+}
+
+}
+
+//=====	Menu: Message Board icon =========================
+var newMBpost = $('#message_board_summary .warning').length + leagueAttributes['NewPrivateMessages'];
+
+if (newMBpost > 0) {
+  $('#mvpmenu #leagueli > a').css("color", "red");
+  $('#leaguesubmenu dd.menumessageboard a .newnotification').html(newMBpost).show();
+}
+
+
+//=====	Menu: Submit Lineup Icon =========================
+if ($('#league_reminders').has('li:contains("lineup")').length) { 
+  $('#myteamsubmenu dd:nth-child(1) a .newnotification').show();
+  $('#mvpmenu #myteamli > a').css("color", "red");
+}
+
+//=====	Menu: Pool Picks Icon =========================
+if ($('#league_reminders').has('li:contains("NFL pool picks")').length || $('#league_reminders').has('li:contains("fantasy pool picks")').length) { 
+  $('#mvpmenu #leagueli > a').css("color", "red");
+  $('#leaguesubmenu dd.menupools .newnotification').show();
+}
+
+//=====	Clone Submenu =========================
+$('#mvpmenu #leaguesubmenu').clone().prependTo('#mvpsubmenu');
+$('#mvpmenu #myteamsubmenu').clone().appendTo('#mvpsubmenu');
+$('#mvpmenu #playerssubmenu').clone().appendTo('#mvpsubmenu');
+$('#mvpmenu #matchupssubmenu').clone().appendTo('#mvpsubmenu');
+$('#mvpmenu #draftsubmenu').clone().appendTo('#mvpsubmenu');
+$('#mvpmenu #researchsubmenu').clone().appendTo('#mvpsubmenu');
+
+//=====	Menu: Player Search =========================
+$("#mvpthirdmenu #player_search input:nth-child(2)").attr("placeholder", "Player Name");
+$('#usericon').click(function(){
+  $('#usericon #welcome').toggle();
+});
+
+//=====	Options 05 - Trade Screen =========================
+if ($('#body_options_05').length) {
+
+// name cells that will need to be removed 
+$("#contentframe").find(".report").has("caption span:contains('Offered By You')").addClass("byme");
+$("#contentframe").find(".report").has("caption span:contains('Offered To You')").addClass("tome");
+$('#contentframe .byme th:nth-of-type(3), #contentframe .byme td:nth-of-type(3), #contentframe .byme th:nth-of-type(5), #contentframe .byme td:nth-of-type(5), #contentframe .tome th:nth-of-type(3), #contentframe .tome td:nth-of-type(3), #contentframe .tome th:nth-of-type(5), #contentframe .tome td:nth-of-type(5)').addClass('removeit');
+
+// build contract tables
+$('#contentframe .report td li').closest('tr').addClass('traderow');
+$('#contentframe .traderow td:nth-of-type(2)').addClass('firstteam');
+$('#contentframe .traderow td:nth-of-type(4)').addClass('secondteam');
+$('#contentframe .traderow .firstteam, #contentframe .traderow .secondteam').append('<table class="contracttable"><tr><th>Players/Picks</th><th>Salary</th><th>Years</th></tr><tr class="contracttablerow"><th>Total:</th><th class="salarytotal"></th><th class="yearstotal"></th></tr><tr><th>Change:</th><th class="salarydifference"></th><th class="yearsdifference"></th></tr><tr><th>Cap Space:</th><th class="salarycap"></th><th class="yearscap"></th></tr><tr><th>New Cap Space:</th><th class="newsalarycap"></th><th class="newyearscap"></th></tr></table>');
+$('#contentframe .report').find('td:contains("Response Comments")').addClass('responsecell').prev().addClass('commentcell').parent().addClass('responserow');
+$('.responsecell').removeClass('removeit');
+//$('.responsecell').wrapInner('<div class="responsetext"></div>');
+$('.commentcell').attr('colspan',2);
+//$('.responsecell').attr('colspan',2);
+
+// extract contract from link title and place in table rows
+/*
+$(".traderow li a").each(function(index, element) {
+	var linkTitle = $(this).prop('title');
+	var linkSalary = linkTitle.split(',')[0].replace('Salary: ','');
+	var linkYears = linkTitle.split(',')[1].replace('Years: ','');
+	$(this).closest('td').prev().find('tr.contracttablerow').before('<tr class="playerrow' + index + '"><td class="player"></td><td class="salary">'+linkSalary+'</td><td class="years">'+linkYears+'</td></tr>');
+});
+*/
+
+$(".traderow li").each(function(index, element) {
+	$(this).wrapInner('<span class="tradeasset'+index+'"></span>');
+	$(this).closest('td').prev().find('tr.contracttablerow').before('<tr class="playerrow playerrow' + index + '"><td class="player"></td><td class="salary"></td><td class="years"></td></tr>');
+	$('.tradeasset'+index).appendTo('.playerrow'+index+' .player');
+});
+
+$(".traderow .playerrow a").each(function(index, element) {
+	var linkTitle = $(this).prop('title');
+	var linkSalary = linkTitle.split(',')[0].replace('Salary: ','');
+	var linkYears = linkTitle.split(',')[1].replace('Years: ','');
+
+	$(this).closest('td').next().html(linkSalary).next().html(linkYears);
+});
+
+var MFL_pid_fid = new Array() // is this needed? 
+var url = baseURLDynamic + "/" + year + "/options?L=" + league_id + "&O=07";
+$.ajax({
+	type: 'GET',
+	url: url,
+	async: false
+}).done(function (rostersData) {
+	var getTeams = $(rostersData).find("table .report");
+	$(rostersData).find("table .report").appendTo('.pagefooter');
+
+	// Define all rosters
+	$('.pagefooter').find('caption a[class^="franchise_"],caption a[class^="myfranchise franchise_"]').each(function () {
+		var fid = $(this).attr("class").substr($(this).attr("class").indexOf('franchise_') + 10, 4);
+		$(this).closest("table").addClass("franchise_" + fid).addClass("roster");
+	});
+
+	$('.pagefooter .roster').hide();
+
+}); // end rosterData
+
+
+// define both teams in trade
+$(".traderow .franchiseicon").each(function() {
+	var firstTeamIcon = $(this).prop('id');
+	var firstTeamNum = firstTeamIcon.replace('franchiseicon','franchise');
+
+	var firstTeamId = 'table.'+firstTeamNum;
+	var firstTeamCap = $(firstTeamId).find('.cap_room_available_row:eq(0) th:eq(1)').text();
+	var firstTeamYear = $(firstTeamId).find('.cap_room_available_row:eq(1) th:eq(2)').text();
+	$(this).closest('td').find('.salarycap').html(firstTeamCap);
+	$(this).closest('td').find('.yearscap').html(firstTeamYear);
+});
+
+// calculate salary
+	$('.traderow').each(function () {
+		var firstsalarysum = 0;
+		var secondsalarysum = 0;
+		$(this).find('.firstteam .salary').each(function () {
+			var val = $.trim($(this).text());
+			if (val) {
+				val = parseFloat(val.replace(/^\$/, ""));
+				firstsalarysum += !isNaN(val) ? val : 0;
+			}
+		});
+		$(this).find('.secondteam .salary').each(function () {
+			var val = $.trim($(this).text());
+			if (val) {
+				val = parseFloat(val.replace(/^\$/, ""));
+				secondsalarysum += !isNaN(val) ? val : 0;
+			}
+		});
+
+	// display salary calculation
+	var firstSalarySumRounded = firstsalarysum.toFixed(2);
+	$(this).find('.firstteam .salarytotal').html('$' + firstSalarySumRounded);
+	var secondSalarySumRounded = secondsalarysum.toFixed(2);
+	$(this).find('.secondteam .salarytotal').html('$' + secondSalarySumRounded);
+
+	// calculate salary change
+	var firstSalaryDifference = firstSalarySumRounded - secondSalarySumRounded;
+	var secondSalaryDifference = secondSalarySumRounded - firstSalarySumRounded;
+	var firstSalaryDifferenceRounded = firstSalaryDifference.toFixed(2);
+	var secondSalaryDifferenceRounded = secondSalaryDifference.toFixed(2);
+	$(this).find('.firstteam .salarydifference').html('$' + firstSalaryDifferenceRounded);
+	$(this).find('.secondteam .salarydifference').html('$' + secondSalaryDifferenceRounded);
+
+	// calculate 1st team new cap space
+	var firstTeamCaps = $(this).closest('tr').find('.firstteam .salarycap').text().replace('$','');
+	var newFirstCap =  parseInt(firstTeamCaps) + parseInt(firstSalaryDifference);
+	var newFirstCapRounded = newFirstCap.toFixed(2);
+	$(this).find('.firstteam .newsalarycap').html('$' + newFirstCapRounded);
+
+	// calculate 2nd team new cap space
+	var secondTeamCaps = $(this).closest('tr').find('.secondteam .salarycap').text().replace('$','');
+	var newSecondCap =  parseInt(secondTeamCaps) + parseInt(secondSalaryDifference);
+	var newSecondCapRounded = newSecondCap.toFixed(2);
+	$(this).find('.secondteam .newsalarycap').html('$' + newSecondCapRounded);
+
+	});
+
+// calculate contract years
+	$('.traderow').each(function () {
+		var firstyearsum = 0;
+		var secondyearsum = 0;
+		$(this).find('.firstteam .years').each(function () {
+			var val = $.trim($(this).text());
+			if (val) {
+				val = parseFloat(val.replace(/^\$/, ""));
+				firstyearsum += !isNaN(val) ? val : 0;
+			}
+		});
+		$(this).find('.secondteam .years').each(function () {
+			var val = $.trim($(this).text());
+			if (val) {
+				val = parseFloat(val.replace(/^\$/, ""));
+				secondyearsum += !isNaN(val) ? val : 0;
+			}
+		});
+	var firstYearSumRounded = firstyearsum.toFixed(0);
+	$(this).find('.firstteam .yearstotal').html(firstYearSumRounded);
+	var secondYearSumRounded = secondyearsum.toFixed(0);
+	$(this).find('.secondteam .yearstotal').html(secondYearSumRounded);
+
+	var firstYearDifference = firstYearSumRounded - secondYearSumRounded;
+	var secondYearDifference = secondYearSumRounded - firstYearSumRounded;
+	var firstYearDifferenceRounded = firstYearDifference.toFixed(0);
+	var secondYearDifferenceRounded = secondYearDifference.toFixed(0);
+	$(this).find('.firstteam .yearsdifference').html(firstYearDifferenceRounded);
+	$(this).find('.secondteam .yearsdifference').html(secondYearDifferenceRounded);
+
+	// calculate 1st team new year cap space
+	var firstTeamYears = $(this).closest('tr').find('.firstteam .yearscap').text();
+	var newFirstYear =  parseInt(firstTeamYears) + parseInt(firstYearDifference);
+	var newFirstYearRounded = newFirstYear.toFixed(0);
+	$(this).find('.firstteam .newyearscap').html(newFirstYearRounded);
+
+	// calculate 2nd team new year cap space
+	var secondTeamYears = $(this).closest('tr').find('.secondteam .yearscap').text();
+	var newSecondYear =  parseInt(secondTeamYears) + parseInt(secondYearDifference);
+	var newSecondYearRounded = newSecondYear.toFixed(0);
+	$(this).find('.secondteam .newyearscap').html(newSecondYearRounded);
+
+	});
+
+} // end trade screen
+
+//=====	h3 and nav headers =========================
+$('h3:contains("|")').each(function(){
+    $(this).html($(this).html().split("|").join(""));
+});
+$('.reportnavigation:contains("|")').each(function(){
+    $(this).html($(this).html().split("|").join(""));
+});
+
+//=====	Custom Tabs =========================
+$(".customtabcontent").each(function(index, element) {
+  $(this).addClass('customtabcontent'+index);
+});
+$(".customtabs a").each(function(index, element) {
+  $(this).addClass('customtab'+index);
+  $('.customtab'+index).click(function(){
+    $('.customtabcontent').hide();
+    $('.customtabcontent'+index).show();
+    $('.customtabs a').removeClass('selectedtab');
+    $('.customtab'+index).addClass('selectedtab');
+  });
+});
+
+//=====	News Pages =========================
+if(document.getElementById("news_articles")) {
+	$("#news_articles form").attr("id","my_form");
+	$("#my_form select").eq(0).attr("id","player_select");
+
+	if($('#player_select').val()==="R") $("#body_news_articles").addClass("myplayers") ;
+//	else if($('#player_select').val()==="W") $("#body_news_articles").addClass("my_watch_list") ;
+	else if($('#player_select').val()==="P") $("#body_news_articles").addClass("myplayers") ;
+	else $("#body_news_articles").addClass("allplayers");
+}
+
+//=====	Auction Page =========================
+    $('#body_options_43 form .report.nocaption').addClass('auctiontable');
+  var auctionrows = $(".auctiontable tr").length-1;
+    $('.auctiontable tr:last').after('<tr class="reportfooter"><td colspan="7" class="warning">There are currently <span id="auctioncount">0</span> players up for auction</td></tr>');
+    $("#auctioncount").html(auctionrows);
+
+
+
+//=====	edit contract screen =========================
+
+$('#body_csetup_salaries span.reportnavigation').after('<h3 class="contractheader" style="cursor:pointer;"><span>(If you don\'t filter by team before clicking, this page will crash) </span>CLICK HERE to display zero year contracts ONLY</h3>');
+$('#body_csetup_salaries .report tr td:nth-child(3)').has('input').addClass('yearcell');
+$('#body_csetup_salaries .report tr').has('.yearcell input[value=""]').addClass('unhidecontracts');
+$('#body_csetup_salaries .report tr').has('.yearcell input[value="0"]').addClass('unhidecontracts');
+$('#body_csetup_salaries .report tr').has('.yearcell input[value="1"]').addClass('hidecontracts');
+$('#body_csetup_salaries .report tr').has('.yearcell input[value="2"]').addClass('hidecontracts');
+$('#body_csetup_salaries .report tr').has('.yearcell input[value="3"]').addClass('hidecontracts');
+$('#body_csetup_salaries .report tr').has('.yearcell input[value="4"]').addClass('hidecontracts');
+$('#body_csetup_salaries .report tr').has('.yearcell input[value="5"]').addClass('hidecontracts');
+
+$('#body_csetup_salaries .contractheader').click(function(){
+  $('#body_csetup_salaries .report tr.unhidecontracts').hide('slow');
+  $('#body_csetup_salaries .report tr.hidecontracts').hide('slow');
+  $('#body_csetup_salaries .report tr.hidecontracts').remove();
+  $('#body_csetup_salaries .report tr').removeClass('oddtablerow eventablerow');
+  $('#body_csetup_salaries .report .unhidecontracts').show('slow');
+  $('#body_csetup_salaries .report tr.unhidecontracts:nth-child(odd)').addClass('oddtablerow');
+  $('#body_csetup_salaries .report tr.unhidecontracts:nth-child(even)').addClass('eventablerow');
+});
+
+
+//=====	Free Agent Style =========================
+    $(".report").find("tr").has("td.status:contains('FA')").addClass("freeagentrow");
+
+
+//=====	lineup page =========================
+    $("#body_lineup").find(".reportnavigation").has("a:contains('Fantasy Sharks')").addClass("hide");
+    $("#body_lineup #startertable .theader").clone().after('#starter-caption-fixed .sheader');
+  $('#body_lineup #mvpthirdmenu div .report, #body_lineup #monthly_calendar.report').hide();
+
+//=====	rosters page =========================
+//  $('#body_options_07 .report').show();
+//  $('#body_options_07 #usericon #welcome, #body_options_07 #monthly_calendar.report, #body_options_07 #message_board_summary.report').hide();
+//  $('#body_lineup #usericon #welcome, #body_lineup #monthly_calendar.report, #body_lineup #message_board_summary.report').hide();
+
+//=====	commish menu =========================
+var commishmenu = '<span> | <a href="//%HOST%/%YEAR%/commissioner_setup?L=%LEAGUEID%">Setup</a></span>';
+var teammenu = '<span> | <a href="//%HOST%/%YEAR%/csetup?L=%LEAGUEID%&C=FCUSTOM">Customize</a></span>';
+if (franchise_id == 0000) {
+$(commishmenu).appendTo("#welcome tr:last-child td, .toggle_login_content tr:last-child td");
+} else if (franchise_id != undefined){
+$(teammenu).appendTo("#welcome tr:last-child td, .toggle_login_content tr:last-child td");
+//=====	hide from teams =========================
+$('#body_csetup_fcustom .pagebody .report tr:nth-child(3), #body_csetup_fcustom .pagebody .report tr:nth-child(4), #body_csetup_fcustom .pagebody .report tr:nth-child(5), #body_csetup_fcustom .pagebody .report tr:nth-child(6), #body_csetup_fcustom .pagebody .report tr:nth-child(7), #body_csetup_fcustom .pagebody .report tr:nth-child(8), #body_csetup_fcustom .pagebody .report tr:nth-child(9), #body_csetup_fcustom .pagebody .report tr:nth-child(10), #body_csetup_fcustom .pagebody .report tr:nth-child(11), #body_csetup_fcustom .pagebody .report tr:nth-child(12), #body_csetup_fcustom .pagebody .report tr:nth-child(13), #body_csetup_fcustom .pagebody .report tr:nth-child(14)').addClass('hidefromteams');
+};
+
+//=====	pagefooter =========================
+  $('.pagefooter').prepend('<center><a href="//%HOST%/%YEAR%/home/%LEAGUEID%?MODULE=MESSAGE19">Default MFL Menu</a></center>');
+
+
+//=====	remove loading text =========================
+//  $('#loading_hint').slideUp();
+
+//=====	testing =========================
+//  $('.pagefooter table').before
+
+
+
+//
+//    End
+//
+});
+
+</script>
+
+
+<script>
+//USER SETTINGS
+var minichat2_displayMessages = 8;
+
+var minichat2_useIcon = true; //If all options set to false then Franchise Name will be displayed
+var minichat2_useLogo = true; //otherwise any of the options which are set to true and are not empty
+var minichat2_useNick = true; //will be used with priority of Icon, Logo and lastly Nick.
+
+var minichat2_bottomUp = true;
+
+var minichat2_includeTime = true;
+var minichat2_includePrivateMessage = true;
+var minichat2_includeUsersOnline = true;
+
+var minichat2_enableSmartRead = true; //Since chat will be on every page this, if enabled, will reduce xml requests if there is no chat activity
+</script>
+
+<script src="//www.habman.com/mfl/apps/js/minichat2.js?version=2"></script>
