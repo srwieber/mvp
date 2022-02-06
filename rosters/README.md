@@ -1,4 +1,4 @@
-# Intro 
+# Info 
 A custom page that places team rosters side by side for easy comparison. 
 
 # Features
