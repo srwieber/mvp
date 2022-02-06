@@ -1,0 +1,42 @@
+#mvpsubmenu #myteamsubmenu {display:block;}
+
+#team_loader {position:fixed;z-index:9999;left: 50%;transform: translate(-50%, 0);width:200px;height:200px;text-align:center;background: rgb(0, 0, 0, .8);border-radius:8px;}
+
+#team_overview {background:#222;margin-top:20px;}
+#team_overview #team, #team_overview #history {white-space:nowrap;}
+#team_overview #matchup, #team_overview #last_week {width:0;}
+#team_overview .report {padding:0;}
+#team_overview .report caption {position:initial;width:99.5%;height:auto;margin:auto;text-align:center;background:#000!important;border-bottom:1px solid var(--dark-bg)!important;box-shadow:0 0!important;}
+#team_overview .report caption span {position:initial;display:inline;width:auto!important;background:transparent!important;border:0!important;box-shadow:0 0!important;}
+#team_overview .highlight_topic {color:#888;}
+#team_overview .gold i {color:#FFD700;}
+#team_overview .silver i {color:#aaa;}
+#team_overview .bronze i {color:#CD7F32;}
+#team_overview .white i {color:#fff;}
+#team_overview .green i {color:#0a0;}
+
+
+#custom_lineup caption img {display:none;}
+#custom_lineup .report textarea {width:99.5%;}
+#custom_lineup .report td {white-space:nowrap;}
+#custom_lineup .report input[type=checkbox] {display:none;}
+#custom_lineup .report .startbox, .benchbox {border:1px solid #aaa;border-radius:5px;margin:2px 5px;padding:5px;width:50px;text-align:center;cursor:pointer;-webkit-touch-callout: none;-webkit-user-select: none;-ms-user-select: none;user-select: none;}
+#custom_lineup .report .startbox {background: #0504aa;border-color:#44a;}
+#custom_lineup .report .startbox.out {background: #a33;border-color:#f00;}
+#custom_lineup .report .startbox.disabled {opacity:0.5;color:#888;}
+#custom_lineup .report .benchbox {background: #777;}
+#custom_lineup .report .benchbox.out {background: #222;border-color:#444;}
+#custom_lineup .report .benchbox.disabled {background: #222;border-color:#444;color:#777;}
+#custom_lineup .report .warning {font-family: 'Rock Salt', cursive;padding: 0 3px;}
+#custom_lineup .report td:nth-of-type(2), 
+#custom_lineup .report td:nth-of-type(4), 
+#custom_lineup .report td:nth-of-type(7), 
+#custom_lineup .report td:nth-of-type(11) {padding-right:4px;border-right:1px solid #444;}
+#custom_lineup .report .posheader th {font-size:14px;color:#fff;text-align:left;padding-left:40px;background: #555;}
+#custom_lineup .report .lineup_header_blank td {padding:10px 0;}
+#custom_lineup .report .lineup_header_blank:first-of-type td {padding:0px 0;}
+#custom_lineup .report .newposition td {border-top-width:0!important;}
+#custom_lineup .report .gameover td, #custom_lineup .report .gameover td a {color:#444;}
+#custom_lineup .report .gameover img, #custom_lineup .report .gameover .warning {opacity:0.5;}
+#custom_lineup .report .offense_count, #custom_lineup .report .defense_count {padding-left:50px;}
+#custom_lineup .report th a {text-decoration:underline;cursor:pointer;}
