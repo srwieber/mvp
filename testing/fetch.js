@@ -2,7 +2,11 @@ const fetch15Min = 900;
 const fetch1Day = 86400;
 
 function getUrl(type) {
-  return `${baseURLDynamic}/${year}/export?TYPE=${type}&L=${league_id}&JSON=1`;
+  let extraParams = '';
+  if (type === 'leagueStandings') {
+    extraParams = '&COLUMN_NAMES=1&ALL=1';
+  }
+  return `${baseURLDynamic}/${year}/export?TYPE=${type}&L=${league_id}&JSON=1${extraParams}`;
 }
 
 const fetchParams = [
@@ -15,7 +19,7 @@ const fetchParams = [
 
 const storedTime = JSON.parse(localStorage.getItem(`${league_name}_storedTime_${year}_${league_id}`)) || { fifteenMin: {}, oneDay: {} };
 
-fetchParams.forEach(([type, url, interval]) => {
+fetchParams.forEach(([type, url, interval], index) => {
   const timeFrame = interval === fetch15Min ? 'fifteenMin' : 'oneDay';
   const storedTimestamp = storedTime[timeFrame][type];
 
@@ -29,6 +33,9 @@ fetchParams.forEach(([type, url, interval]) => {
         // Update the stored timestamp for the current time frame
         storedTime[timeFrame][type] = currentServerTime;
         localStorage.setItem(`${league_name}_storedTime_${year}_${league_id}`, JSON.stringify(storedTime));
+        if (index === fetchParams.length - 1) {
+          nextFunction();
+        }
       })
       .catch(error => {
         console.error(`Error fetching data for ${type}:`, error);
@@ -36,5 +43,8 @@ fetchParams.forEach(([type, url, interval]) => {
   } else {
     const remainingMinutes = Math.ceil((interval - (currentServerTime - storedTimestamp)) / 60);
     console.log(`Using cached data for ${type}. ${remainingMinutes} minute(s) until update.`);
+    if (index === fetchParams.length - 1) {
+      nextFunction();
     }
+  }
 });
