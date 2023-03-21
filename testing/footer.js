@@ -1,6 +1,6 @@
 // my team Name & Icon
 let myTeamName = document.createTextNode('Guest');
-let myDivision = 'division';
+let myDivision = '';
 const myTeamNameSpan = document.createElement('span');
 const myTeamIcon = document.createElement('img');
 
@@ -14,8 +14,8 @@ const updateGlobal = () => {
     myTeamIcon.src = 'https://i.ibb.co/1YCMFqq/bguest.png';
     myDivision += '00';
   }
-  if(myDivision === 'divisionundefined'){
-    myDivision = 'division00';
+  if(myDivision === 'undefined'){
+    myDivision = '00';
   }
   myTeamNameSpan.appendChild(myTeamName);
 }
@@ -46,7 +46,7 @@ const moveMFLMenu = () => {
     leaguelogo.classList.remove('leaguelogo');
   }
   const leagueNameBR = document.querySelector('.pagetitle h1').childNodes[0].textContent;
-  const leagueName = leagueNameBR.trim().replace(/[\r\n]+/gm, '');
+  leagueName = leagueNameBR.trim().replace(/[\r\n]+/gm, '');
   mflMenuLinks.forEach(link => {
     if (link.textContent === 'Home') {
       link.classList.add('logo');
@@ -221,6 +221,98 @@ const homepageTabs = () => {
   }
 }
 
+const editStandings = () => {
+  const numRows = 5;
+  const standings = document.getElementById('standings');
+  const rows = standings.getElementsByTagName('tr');
+  standings.parentNode.setAttribute("id", "standings_card");
+  const newStandings = document.getElementById('standings_card');
+  let divisionIndex = 0;
+  const standingsHeader = document.createElement('h3');
+  standingsHeader.setAttribute("id", "standings_header");
+  standings.parentNode.prepend(standingsHeader);
+  const tableContainer = document.createElement('div');
+  tableContainer.setAttribute("id", "standings_container");
+  standings.parentNode.append(tableContainer);
+  for (let i = 0; i < 4; i++) {
+    const header = $(`<div id="division_0${divisionIndex}_link">${leagueDivisions['0' + divisionIndex].name}</div>`);
+    const newTable = $(`<table id="division_0${divisionIndex}"></table>`);
+    const footerRow = $(`<tr class="reportfooter"><td colspan="14"><a href="${baseURLDynamic}/${year}/standings?L=${league_id}">View Full Standings</a></td></tr>`);
+    let currentRow = null;
+    for (let j = 0; j < numRows; j++) {
+      currentRow = $('#standings tr:first-child');
+      $(newTable).append(currentRow);
+      if(j === 4) {
+        $(newTable).append(footerRow);
+      }
+    }
+    $('#standings_header').append(header);
+    $(newTable).appendTo(tableContainer);
+    divisionIndex++;
+  }
+  $('#division_' + myDivision).addClass('active');
+  $('#division_' + myDivision + '_link').addClass('active');
+  $(tableContainer).before('<div id="standings_left"><i class="fa-solid fa-chevron-left"></i></div>');
+  $(tableContainer).after('<div id="standings_right"><i class="fa-solid fa-chevron-right"></i></div>');
+  const standingsLeft = document.getElementById('standings_left');
+  const standingsRight = document.getElementById('standings_right');
+  let activeTableID = newStandings.querySelector('table.active').id;
+  let activeTable = document.getElementById(activeTableID);
+  const headerLinks = standingsHeader.querySelectorAll('div');
+  let activeHeaderLink = document.getElementById(activeTableID + '_link');
+  const tables = newStandings.querySelectorAll('table');
+  standingsLeft.addEventListener("click", function() {
+    headerLinks.forEach(headerLinks => {
+      headerLinks.classList.remove('active');
+    });   
+    tables.forEach(tables => {
+      tables.classList.remove('active');
+    });   
+    if( activeTableID === 'division_00'){
+      document.getElementById('division_03_link').classList.add('active');
+      document.getElementById('division_03').classList.add('active');
+    }else{
+      activeHeaderLink.previousSibling.classList.add('active');
+      activeTable.previousSibling.classList.add('active');
+    }
+    activeTableID = newStandings.querySelector('table.active').id;
+    activeHeaderLink = document.getElementById(activeTableID + '_link');
+    activeTable = document.getElementById(activeTableID);
+  });
+  standingsRight.addEventListener("click", function() {
+    headerLinks.forEach(headerLinks => {
+      headerLinks.classList.remove('active');
+    });   
+    tables.forEach(tables => {
+      tables.classList.remove('active');
+    });   
+    if( activeTableID === 'division_03'){
+      document.getElementById('division_00_link').classList.add('active');
+      document.getElementById('division_00').classList.add('active');
+    }else{
+      activeHeaderLink.nextSibling.classList.add('active');
+      activeTable.nextSibling.classList.add('active');
+    }
+    activeTableID = newStandings.querySelector('table.active').id;
+    activeHeaderLink = document.getElementById(activeTableID + '_link');
+    activeTable = document.getElementById(activeTableID);
+  });
+  standingsHeader.addEventListener("click", function(e) {
+    activeTableID = e.target.id.replace("_link", "");
+    activeHeaderLink = document.getElementById(activeTableID + '_link');
+    activeTable = document.getElementById(activeTableID);
+    headerLinks.forEach(headerLinks => {
+      headerLinks.classList.remove('active');
+      e.target.classList.add('active');
+    });   
+    tables.forEach(tables => {
+      tables.classList.remove('active');
+      activeTable.classList.add('active');
+    });   
+  });
+  $(standings).remove();
+}
+
 const removeElements = () => {
   var elementsToRemove = document.querySelectorAll('noscript, .pageheader, .leaguelogo, nav > span, li.mfl-icon, .main_tabmenu');
   elementsToRemove.forEach(function(element) {
@@ -242,7 +334,7 @@ const init = () => {
   editPagebody();
   if( thisProgram === "home" ) {
     homepageTabs();
-//    editStandings();
+    editStandings();
   }
   removeElements();
 }
