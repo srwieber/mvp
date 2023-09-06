@@ -4,6 +4,187 @@ let myDivision = '';
 const myTeamNameSpan = document.createElement('span');
 const myTeamIcon = document.createElement('img');
 
+// current week
+let currentWeek = 1;
+if(liveScoringWeek > completedWeek){
+  currentWeek = liveScoringWeek;
+}else if(completedWeek === 0){
+  // keep currentWeek = 1;
+}else{
+  currentWeek = completedWeek;
+}
+
+
+/* === adjust the reusable fetch function === */
+const adjustFetch = (moduleName) => {
+
+//my lineup
+  if (moduleName === 'my_lineup'){
+    const myLineup = document.getElementById('my_lineup');
+    const links = myLineup.querySelectorAll('a');
+    //change links to remove home by inserting year
+    for(var i = 0; i < links.length ; i++) {
+      const a = links[i].getAttribute("href");
+      links[i].href = `/${year}/${a}`; 
+    }
+    $(myLineup).find('th:contains("Non-Starters")').closest('tr').prev().addClass('total_players');
+    const myStarters = $('.total_players').find('td:first-child').text().replace(' players','');
+
+    let validLineup = true;
+    const rows = myLineup.getElementsByTagName('tr');
+    for (let i = 1; i < rows.length; i++) {
+      if( rows[i].classList.contains('total_players') ){
+        break;
+      }else{
+        const warning = rows[i].querySelectorAll('.warning')[0];
+        if(warning){
+          var warningText = warning.textContent;
+        }
+        if( warningText === 'O' || warningText === 'D' || warningText === 'S' || warningText === 'I' ){
+          validLineup = false;
+console.log( rows[i].querySelectorAll('.player')[0].querySelectorAll('a')[0].textContent );
+        }
+        rows[i].classList.add('starter');
+      }
+    }
+
+    const checklistLineup = document.getElementById('checklist_lineup');
+    const checklistLineupI = checklistLineup.getElementsByTagName('i')[0];
+    if( !validLineup || myStarters != 26 ){
+      checklistLineup.classList.add('notdone');
+      checklistLineupI.classList.add('fa-circle-xmark');
+    }else{
+      checklistLineup.classList.add('done');
+      checklistLineupI.classList.add('fa-circle-check');
+    }
+  }
+
+//nfl pickem
+  else if(moduleName === 'nfl_pickem'){
+    const checklistNflPickem = document.getElementById('checklist_nfl_pickem');
+    const checklistNflPickemI = checklistNflPickem.getElementsByTagName('i')[0];
+    const checklistNflPickemSpan = checklistNflPickem.getElementsByTagName('span')[0];
+
+    function validateTable() {
+      const nflPickem = document.getElementById('nfl_pickem');
+      const nflPickemRows = nflPickem.getElementsByTagName('tr');
+      for (var i = 1; i < nflPickemRows.length; i++) {
+        const inputs = nflPickemRows[i].getElementsByTagName('input');
+        let isChecked = false;
+        for (var j = 0; j < inputs.length; j++) {
+          if (inputs[j].type === 'radio' && inputs[j].checked) {
+            isChecked = true;
+            break; // Exit the inner loop if a checked radio input is found
+          }
+        }
+        if (!isChecked) {
+          return false;
+        }
+      }
+      return true;
+    }
+    let isTableValid = validateTable();
+    if (isTableValid) {
+      checklistNflPickem.classList.add('done');
+      checklistNflPickemI.classList.add('fa-circle-check');
+      checklistNflPickemSpan.textContent = 'Submitted';
+    }else{
+      checklistNflPickem.classList.add('notdone');
+      checklistNflPickemI.classList.add('fa-circle-xmark');
+      checklistNflPickemSpan.textContent = 'Missing';
+    }
+  }
+
+//fantasy pickem
+  else if(moduleName === 'fantasy_pickem'){
+    const checklistFantasyPickem = document.getElementById('checklist_fantasy_pickem');
+    const checklistFantasyPickemI = checklistFantasyPickem.getElementsByTagName('i')[0];
+    const checklistFantasyPickemSpan = checklistFantasyPickem.getElementsByTagName('span')[0];
+
+//combine with validateTable above
+    function validateFantasyTable() {
+      const fantasyPickem = document.getElementById('fantasy_pickem');
+      const fantasyPickemRows = fantasyPickem.getElementsByTagName('tr');
+      for (var i = 1; i < fantasyPickemRows.length; i++) {
+        const inputs = fantasyPickemRows[i].getElementsByTagName('input');
+        let isChecked = false;
+        for (var j = 0; j < inputs.length; j++) {
+          if (inputs[j].type === 'radio' && inputs[j].checked) {
+            isChecked = true;
+            break; // Exit the inner loop if a checked radio input is found
+          }
+        }
+        if (!isChecked) {
+          return false;
+        }
+      }
+      return true;
+    }
+    let isFantasyTableValid = validateFantasyTable();
+    if (isFantasyTableValid) {
+      checklistFantasyPickem.classList.add('done');
+      checklistFantasyPickemI.classList.add('fa-circle-check');
+      checklistFantasyPickemSpan.textContent = 'Submitted';
+    }else{
+      checklistFantasyPickem.classList.add('notdone');
+      checklistFantasyPickemI.classList.add('fa-circle-xmark');
+      checklistFantasyPickemSpan.textContent = 'Missing';
+    }
+  }
+
+}
+
+/* === reusable fetch function === */
+//  fetchFunction(`${baseURLDynamic}/${year}/home/${league_id}?MODULE=TRADES`, '.mobile-wrap', printFetchLocation);
+const fetchFunction = (fetchURL, elementsToFetch, printFetchLocation, moduleName) => {
+//  let fetchURL = `${baseURLDynamic}/${year}/all_reports?L=${league_id}`;
+  fetch(fetchURL)
+    .then(function(response) {
+      if (response.ok) {
+        return response.text();
+      } else {
+        console.log("No data retrieved");
+      }
+    })
+    .then(function(text) {
+      const parser = new DOMParser();
+      const parsed = parser.parseFromString(text, "text/html");
+      let element = $(parsed).find(elementsToFetch).closest('.report');
+      element = element[0].outerHTML;
+      const newCard = document.createElement("div");
+      newCard.setAttribute("id", moduleName);
+      newCard.classList.add("card");
+      newCard.innerHTML = element;
+      newCard.querySelector('.report').classList.remove('report');
+      printFetchLocation.prepend(newCard);
+/*
+      var parser = new DOMParser();
+      var html = parser.parseFromString(text, "text/html");
+      var items = html.querySelectorAll(elementsToFetch);
+      if (items) {
+        for (let i = 0; i < items.length; i++) {
+          const newDiv = document.createElement("div");
+          newDiv.classList.add("card");
+          newDiv.classList.add("loading");
+          newDiv.appendChild(items[i]);
+          printFetchLocation.prepend(newDiv);
+        }
+        if (items.length < 1) {
+          console.log("This isn't available. Check the league Calendar or try again.");
+        }
+      }else {
+        console.log("Nothing To See Here");
+      }
+*/
+  })
+    .then(function() {
+      adjustFetch(moduleName);
+  })
+    .catch(function(error) {
+      console.log(error);
+  });
+}
+
 
 const updateGlobal = () => {
   if (typeof franchise_id != "undefined") {
@@ -178,8 +359,16 @@ const editPagebody = () => {
   sectionEl.appendChild(pagebody.cloneNode(true));
   pagebody.parentNode.replaceChild(sectionEl, pagebody);
 
+  // move random h3 to pagebody
+  $('body > h3').prependTo('.pagebody');
+
   // attach header to section
   sectionEl.prepend(newHeader);
+
+// edit home page modules
+  $('#waiver_request_list caption').wrapInner('<span>');
+  $('.mobile-wrap:has(#trade_bait) > div').remove();
+  $('#trade_bait tr:last-of-type').after(`<tr class="reportfooter"><td colspan="4"><a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=133">Edit</a> | <a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=133&DELETE=1">Delete</a></td></tr>`);
 
   const homepageTabContents = document.querySelectorAll('.homepagetabcontent');
   homepageTabContents.forEach(function(tabContent) {
@@ -194,12 +383,14 @@ const editPagebody = () => {
       const captionSpan = mobileWrap.querySelector('table caption span');
       captionSpan.textContent = captionSpan.textContent.replace('10 Newest ', '');
       captionSpan.textContent = captionSpan.textContent.replace('Head-To-Head', '');
+      captionSpan.textContent = captionSpan.textContent.replace(' for ', '');
     });
     const removeTable = tabContent.querySelector('#homepagecolumns');
     removeTable.remove();
   });
 
   // remove mobile-wrap class
+if( !$('#body_options_05').length ){
   const pagebodyMobileWraps = document.querySelectorAll('.mobile-wrap');
   pagebodyMobileWraps.forEach(function(pagebodyMobileWrap) {
     pagebodyMobileWrap.classList.add('card');
@@ -208,6 +399,7 @@ const editPagebody = () => {
     mobileWrapTable.classList.remove('homepagemodule');
     mobileWrapTable.classList.remove('report');
   });
+}
 
 
 }
@@ -313,6 +505,108 @@ const editStandings = () => {
   $(standings).remove();
 }
 
+const myChecklist = () => {
+  const mainTab = document.getElementById('tabcontent0');
+  let checklist = '<div id="checklist" class="card">';
+  checklist += '<h3>My Checklist</h3>';
+  checklist += '<div>';
+
+  // valid lineup
+  const printFetchLocation = document.getElementById('tabcontent1');
+//need to change myTeam to logged in owner
+  myTeam = 'caption .franchise_0009';
+  fetchFunction(`${baseURLDynamic}/${year}/options?L=${league_id}&O=06`, myTeam, printFetchLocation, "my_lineup");
+  checklist += `<a id="checklist_lineup" href="${baseURLDynamic}/${year}/options?L=${league_id}&O=02"><i class="fa-solid"></i> Valid Lineup</a>`;
+
+  // IR compliance
+  if( !$('#roster').length ){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=18">Error: Add My Roster Module</a>`;
+  }else if( $('#roster b.warning').length ){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=18" class="notdone"><i class="fa-solid fa-circle-xmark"></i> IR Violation</a>`;
+  }else{
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=18" class="done"><i class="fa-solid fa-circle-check"></i> IR Compliant</a>`;
+  }
+
+  // nfl pickem
+  nflPickemTable = '.pagebody .report caption';
+  fetchFunction(`${baseURLDynamic}/${year}/options?L=${league_id}&O=121`, nflPickemTable, printFetchLocation, "nfl_pickem");
+  checklist += `<a id="checklist_nfl_pickem" href="${baseURLDynamic}/${year}/options?L=${league_id}&O=121"><i class="fa-solid"></i> NFL Pick\'em <span></span></a>`;
+
+  // fantasy pickem
+  fantasyPickemTable = '.pagebody .report caption';
+  fetchFunction(`${baseURLDynamic}/${year}/options?L=${league_id}&O=179`, fantasyPickemTable, printFetchLocation, "fantasy_pickem");
+  checklist += `<a id="checklist_fantasy_pickem" href="${baseURLDynamic}/${year}/options?L=${league_id}&O=179"><i class="fa-solid"></i> Fantasy Pick\'em <span></span></a>`;
+
+  // survivor
+//need to find a better way to get the current week
+  const survivorCell = currentWeek + 1;
+  if( !$('#nfl_survivor_pool').length ){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05">Error: Add NFL Survivor Pool Module</a>`;
+//  }else if( $('#nfl_survivor_pool .myfranchise').closest('tr').find(`td:nth-of-type(${survivorCell}`).text() === '' ){
+  }else if( $('#nfl_survivor_pool .myfranchise').closest('tr').find(`td:nth-of-type(${survivorCell})`).text() === '' ){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=120" class="notdone"><i class="fa-solid fa-circle-xmark"></i> Survivor Pick Missing</a>`;
+  }else {
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=120" class="done"><i class="fa-solid fa-circle-check"></i> Survivor Pick Submitted</a>`;
+  }
+
+  // respond to trades
+  if(leagueAttributes['PendingTradesToMe'] === undefined){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05">Error: Add Pending Trades Module</a>`;
+  }else if( leagueAttributes['PendingTradesToMe'] > 0 ) {
+    let plural = ''; if(leagueAttributes['PendingTradesToMe'] > 1){plural = 's'}
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05" class="notdone"><i class="fa-solid fa-circle-xmark"></i> Respond To ${leagueAttributes['PendingTradesToMe']} Trade${plural}</a>`;
+  }else{
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05" class="done"><i class="fa-solid fa-circle-check"></i> Respond To Trades</a>`;
+  }
+
+  // offer trades
+  if( leagueAttributes['PendingTradesFromMe'] === undefined ) {
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05">Error: Add Pending Trades Module</a>`;
+  }else if( leagueAttributes['PendingTradesFromMe'] > 0 ) {
+    let plural = ''; if(leagueAttributes['PendingTradesFromMe'] > 1){plural = 's'}
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05" class="done"><i class="fa-solid fa-circle-check"></i> Offered ${leagueAttributes['PendingTradesFromMe']} Trade${plural}</a>`;
+  }else{
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05" class="notdone"><i class="fa-solid fa-circle-xmark"></i> Offer A Trade</a>`;
+  }
+
+  // update trade bait
+  if( !$('#trade_bait').length ){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05">Error: Add Trade Bait Module</a>`;
+  }else if( $('#trade_bait .myfranchise').length ){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=133" class="done"><i class="fa-solid fa-circle-check"></i> Trade Bait Updated</a>`;
+  }else{
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=133" class="notdone"><i class="fa-solid fa-circle-xmark"></i> Update Trade Bait</a>`;
+  }
+
+  // submit waiver claim
+  const waiverTable = document.getElementById('waiver_request_list');
+  let waiverList = null;
+  if(waiverTable){
+    waiverList = waiverTable.getElementsByTagName('td')[0].textContent;
+  }
+  if( !waiverTable ){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05">Error: Add My Pending Waiver Module</a>`;
+  }else if( waiverList === "You don't have any waiver claims submitted into the system at this time." ){
+    checklist += `<a href="${baseURLDynamic}/${year}/add_drop?L=${league_id}" class="notdone"><i class="fa-solid fa-circle-xmark"></i> Submit Waiver Claim</a>`;
+  }else{
+    checklist += `<a href="${baseURLDynamic}/${year}/add_drop?L=${league_id}" class="done"><i class="fa-solid fa-circle-check"></i> Waiver Claim Submitted</a>`;
+  }
+
+  // vote on poll
+  if( !$('#poll').length ){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=05">Error: Add Newest League Poll Module</a>`;
+  }else if( $('#poll label').length ){
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=69" class="notdone"><i class="fa-solid fa-circle-xmark"></i> Vote on Poll</a>`;
+
+  }else {
+    checklist += `<a href="${baseURLDynamic}/${year}/options?L=${league_id}&O=69" class="done"><i class="fa-solid fa-circle-check"></i> Vote on Poll</a>`;
+  }
+
+  checklist += '</div>';
+  checklist += '</div>';
+  $(mainTab).append(checklist);
+}
+
 const removeElements = () => {
   var elementsToRemove = document.querySelectorAll('noscript, .pageheader, .leaguelogo, nav > span, li.mfl-icon, .main_tabmenu');
   elementsToRemove.forEach(function(element) {
@@ -322,6 +616,7 @@ const removeElements = () => {
   document.addEventListener('DOMContentLoaded', function() {
     const pagefooter = document.querySelector('.pagefooter');
     pagefooter.remove();
+    document.getElementsByTagName('body')[0].style.display = "flex";
   });
 }
 
@@ -332,9 +627,11 @@ const init = () => {
   appendToHeadSection();
   moveMFLMenu();
   editPagebody();
-  if( thisProgram === "home" ) {
+  const isHome = document.getElementsByClassName('homepagetabcontent');
+  if( thisProgram === "home" && isHome.length ) {
     homepageTabs();
     editStandings();
+    myChecklist();
   }
   removeElements();
 }
